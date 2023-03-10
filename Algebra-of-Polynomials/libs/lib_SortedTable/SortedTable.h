@@ -1,0 +1,6 @@
+#ifndef LIB_SORTEDTABLE_SORTEDTABLE_H_
+#define
+
+
+
+#endif // !LIB_SORTEDTABLE_SORTEDTABLE_H_
