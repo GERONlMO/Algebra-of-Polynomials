@@ -56,12 +56,12 @@
 
 + Общая схема строения классовой системы проекта.
 <kbd>
-<image src="/images/image0.png">
+<image src="/images/General structure.png">
 </kbd>
 
 + Классовая система, относящаяся к работе с различными таблицами.
 <kbd>
-<image src="/images/image1.png">
+<image src="/images/Table structure.png">
 </kbd>
   
 > + Table - абстрактный класс, родитель всех таблиц.
@@ -77,7 +77,7 @@
 
 + Классовая система, относящаяся к работе с математическими вычислениями.
 <kbd>
-<image src="/images/image2.png">
+<image src="/images/Math calculations structure.png">
 </kbd>
 
 > + Monom - структура, описывающая наименьшую единицу полинома.
