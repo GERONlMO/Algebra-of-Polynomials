@@ -1,16 +1,16 @@
 #ifndef LIB_MONOM_MONOM_H_
-#define
+#define LIB_MONOM_MONOM_H_
 
 #include <string>
 
 class Monom {
-public:
 	int coeff;
-	int index;
-	int* powers;
-
+	int powers[3];
+public:
 	Monom();
 	Monom(int coeff, int index, int* powers);
+	int getCoeff();
+	int* getPowers();
 };
 
 #endif // !LIB_MONOM_MONOM_H_

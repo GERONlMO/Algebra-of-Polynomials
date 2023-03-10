@@ -1,5 +1,5 @@
 #ifndef LIB_ORDEREDTABLE_ORDEREDTABLE_H_
-#define
+#define LIB_ORDEREDTABLE_ORDEREDTABLE_H_
 
 #include "Table.h"
 template <typename T>

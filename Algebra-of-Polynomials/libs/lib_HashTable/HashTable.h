@@ -1,5 +1,5 @@
 #ifndef LIB_HASHTABLE_HASHTABLE_H_
-#define
+#define LIB_HASHTABLE_HASHTABLE_H_
 
 
 
