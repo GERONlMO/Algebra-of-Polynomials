@@ -1,5 +1,5 @@
 #ifndef LIB_TREE_TREE_H_
-#define
+#define LIB_TREE_TREE_H_
 
 #include <iostream>
 template <typename Type>

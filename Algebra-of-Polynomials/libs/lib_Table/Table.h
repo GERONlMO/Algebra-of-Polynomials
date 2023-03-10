@@ -1,5 +1,5 @@
 #ifndef LIB_TABLE_TABLE_H_
-#define
+#define LIB_TABLE_TABLE_H_
 
 #include <iostream>
 template <typename T>

@@ -1,10 +1,11 @@
 #ifndef LIB_PARSER_PARSER_H_
-#define
+#define LIB_PARSER_PARSER_H_
 
 #include <map>
 #include <stack>
 #include <iostream>
-#include "Stack.h"
+#include "../lib_Stack/Stack.h"
+#include "../lib_Monom/Monom.h"
 
 class Parser {
 
@@ -30,9 +31,23 @@ private:
 
 public:
 	Parser(std::string expression);
-	std::string toPostfix();
+
+	/// <summary>
+	/// Parsing string polynom into postfix expression
+	/// </summary>
+	/// <returns>String postfix expression</returns>
+	std::string parse();
 	double calculate();
 	std::string getPostfix();
+	std::string* split(std::string polynom);
+	Monom getMonom(std::string monom);
+
+	/// <summary>
+	/// Uniting array of monoms into string polynom
+	/// </summary>
+	/// <param name="Array of Monoms"></param>
+	/// <returns></returns>
+	std::string unite(Monom* monoms);
 };
 
 #endif // !LIB_PARSER_PARSER_H_
