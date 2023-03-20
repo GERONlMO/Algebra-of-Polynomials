@@ -20,6 +20,14 @@ public:
 	Monom operator*(const Monom& monom);
 	Monom operator/(const int* x);
 	Monom operator/(const Monom& monom);
+	bool operator==(const Monom& monom);
+	bool operator!=(const Monom& monom);
+	bool operator>(const Monom& monom);
+	bool operator<(const Monom& monom);
+	bool operator>=(const Monom& monom);
+	bool operator<=(const Monom& monom);
+
+
 };
 
 #endif // !LIB_MONOM_MONOM_H_
