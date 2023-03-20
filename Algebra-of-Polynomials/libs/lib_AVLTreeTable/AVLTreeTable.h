@@ -1,8 +1,9 @@
 #ifndef LIB_AVL_AVL_H_
 #define LIB_AVL_AVL_H_
 
-#include <..\lib_Table\Table.h>
-class AVL : public Table{
+#include "..\lib_Table\Table.h"
+template <typename T>
+class AVLTreeTable : public Table{
 
 };
 
