@@ -6,8 +6,8 @@
 template <typename T>
 class List {
 	int Size;
-	Node* last;
-	Node* first;
+	T* last;
+	T* first;
 public:
 	List();
 	int clear() {};
