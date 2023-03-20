@@ -1,9 +1,9 @@
 #ifndef LIB_AVL_AVL_H_
 #define LIB_AVL_AVL_H_
 
-#include "..\lib_Table\Table.h"
+#include "..\lib_TreeTable\TreeTable.h"
 template <typename T>
-class AVLTreeTable : public Table{
+class AVLTreeTable : public TreeTable{
 
 };
 

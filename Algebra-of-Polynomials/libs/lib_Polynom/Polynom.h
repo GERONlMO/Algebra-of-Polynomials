@@ -25,7 +25,7 @@ public:
 	bool operator>=(const Polynom& polynom);
 	bool operator<=(const Polynom& polynom);
 
-	int in(int x);
+	int at(int x);
 	Polynom derivative();
 	Polynom integral();
 	std::string toString();
