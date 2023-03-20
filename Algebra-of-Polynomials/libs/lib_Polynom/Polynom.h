@@ -18,6 +18,12 @@ public:
 	Polynom operator*(const Polynom& polynom);
 	Polynom operator/(const int* x);
 	Polynom operator/(const Polynom& polynom);
+	bool operator==(const Polynom& polynom);
+	bool operator!=(const Polynom& polynom);
+	bool operator>(const Polynom& polynom);
+	bool operator<(const Polynom& polynom);
+	bool operator>=(const Polynom& polynom);
+	bool operator<=(const Polynom& polynom);
 
 	int in(int x);
 	Polynom derivative();
