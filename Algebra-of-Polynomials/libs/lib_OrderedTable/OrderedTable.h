@@ -1,7 +1,7 @@
 #ifndef LIB_ORDEREDTABLE_ORDEREDTABLE_H_
 #define LIB_ORDEREDTABLE_ORDEREDTABLE_H_
 
-#include "Table.h"
+#include "..\lib_Table\Table.h"
 template <typename T>
 class OrderedTable : public Table {
 

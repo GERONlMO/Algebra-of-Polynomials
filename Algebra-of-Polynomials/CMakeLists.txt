@@ -25,10 +25,11 @@ add_subdirectory ("libs/lib_SortedArrayTable")
 add_subdirectory ("libs/lib_SortedTable")
 add_subdirectory ("libs/lib_Stack")
 add_subdirectory ("libs/lib_Table")
-add_subdirectory ("libs/lib_Tree")
+add_subdirectory ("libs/lib_TreeTable")
 add_subdirectory ("libs/lib_UnorderedTable")
 add_subdirectory ("libs/lib_UnsortedTable")
 add_subdirectory ("libs/lib_Iterator")
+add_subdirectory ("libs/lib_AVLTreeTable")
 
 option(BTEST "build test?" OFF) # указываем подключаем ли google-тесты (ON или YES) или нет (OFF или NO)
 

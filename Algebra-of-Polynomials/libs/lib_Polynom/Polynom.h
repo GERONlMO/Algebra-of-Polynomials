@@ -2,17 +2,33 @@
 #define LIB_POLYNOM_POLYNOM_H_
 #include <string>
 #include "..\lib_Monom\Monom.h"
+#include "..\lib_List\List.h"
 
 class Polynom {
 	std::string polynom;
-	Monom* monoms;
+	List<Monom> monoms;
 public:
+	Polynom(std::string);
+	Polynom operator=(const Polynom& polynom);
+	Polynom operator+(const Monom& monom);
 	Polynom operator+(const Polynom& polynom);
+	Polynom operator-(const Monom& monom);
 	Polynom operator-(const Polynom& polynom);
+	Polynom operator*(const int* x);
 	Polynom operator*(const Polynom& polynom);
+	Polynom operator/(const int* x);
 	Polynom operator/(const Polynom& polynom);
+	bool operator==(const Polynom& polynom);
+	bool operator!=(const Polynom& polynom);
+	bool operator>(const Polynom& polynom);
+	bool operator<(const Polynom& polynom);
+	bool operator>=(const Polynom& polynom);
+	bool operator<=(const Polynom& polynom);
 
-	std::string getPolynom();
+	int at(int x);
+	Polynom derivative();
+	Polynom integral();
+	std::string toString();
 	Monom* getMonoms();
 
 

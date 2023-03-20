@@ -11,6 +11,23 @@ public:
 	Monom(int coeff, int index, int* powers);
 	int getCoeff();
 	int* getPowers();
+	void toString();
+	Monom& operator=(const Monom& monom);
+	Monom operator+(const Monom& monom);
+	Monom operator-() const;
+	Monom operator-(const Monom& monom);
+	Monom operator*(const int* x);
+	Monom operator*(const Monom& monom);
+	Monom operator/(const int* x);
+	Monom operator/(const Monom& monom);
+	bool operator==(const Monom& monom);
+	bool operator!=(const Monom& monom);
+	bool operator>(const Monom& monom);
+	bool operator<(const Monom& monom);
+	bool operator>=(const Monom& monom);
+	bool operator<=(const Monom& monom);
+
+
 };
 
 #endif // !LIB_MONOM_MONOM_H_
