@@ -29,6 +29,7 @@ add_subdirectory ("libs/lib_Tree")
 add_subdirectory ("libs/lib_UnorderedTable")
 add_subdirectory ("libs/lib_UnsortedTable")
 add_subdirectory ("libs/lib_Iterator")
+add_subdirectory ("libs/lib_AVLTreeTable")
 
 option(BTEST "build test?" OFF) # указываем подключаем ли google-тесты (ON или YES) или нет (OFF или NO)
 
