@@ -19,8 +19,6 @@ public:
 	bool isEmpty();
 	T top();
 	stack<T>& operator=(const stack<T>& stk);
-	T& operator[] (int index);
-
 };
 
 #endif // !LIB_STACK_STACK_H_
