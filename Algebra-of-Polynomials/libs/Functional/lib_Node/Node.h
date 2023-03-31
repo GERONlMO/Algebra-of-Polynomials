@@ -4,17 +4,22 @@
 #include <string>
 template <typename T>
 class Node {
-	std::string value;
-	std::string key;
-	T* next;
-	T* top;
+	T value;
+	T key;
+	Node* left;
+	Node* right;
+	Node* top;
 	
 public:
-	std::string getValue();
-	std::string getKey();
-	T* getNext();
-	T* getTop();
-	T& operator= (const T& node);
+	Node(T key, T value);
+	T getValue();
+	T getKey();
+	void setValue();
+	void setKey();
+	Node* getLeft();
+	Node* getRight();
+	Node* getTop();
+	Node& operator= (const Node& node);
 };
 
 #endif // !LIB_NODE_NODE_H_
