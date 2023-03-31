@@ -4,7 +4,6 @@
 #include <iostream>
 template <typename T>
 class Table {
-	int size;
 public:
 	virtual Table();
 	virtual int insert(T obj);
