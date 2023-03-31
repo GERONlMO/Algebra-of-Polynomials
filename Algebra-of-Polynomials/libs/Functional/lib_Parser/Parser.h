@@ -6,12 +6,12 @@
 #include <iostream>
 #include "../lib_Stack/Stack.h"
 #include "../lib_Monom/Monom.h"
+#include "../lib_SyntaxTree/SyntaxTree.h"
 
 class Parser {
-
-private:
 	std::string infixExpression;
 	std::string postfixExpression;
+	SyntaxTree<std::string> tree;
 	std::map<char, int> operationsPriority = {
 		{'(', 0},
 		{'+', 1},

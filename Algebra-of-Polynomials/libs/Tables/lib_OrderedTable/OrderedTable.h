@@ -4,7 +4,11 @@
 #include "..\lib_Table\Table.h"
 template <typename T>
 class OrderedTable : public Table {
-
+public:
+	virtual int insert(T obj);
+	virtual int remove(T obj);
+	virtual T find(std::string key);
+	virtual void print();
 };
 
 #endif // !LIB_ORDEREDTABLE_ORDEREDTABLE_H_

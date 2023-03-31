@@ -1,10 +1,16 @@
-#ifndef LIB_AVL_AVL_H_
-#define LIB_AVL_AVL_H_
-
-#include "..\lib_TreeTable\TreeTable.h"
+#ifndef LIB_AVLTREETABLE_AVLTREETABLE_H_
+#define LIB_AVLTREETABLE_AVLTREETABLE_H_
+#include "../../Functional/lib_AVLTree/AVLTree.h"
+#include "../lib_Table/Table.h"
 template <typename T>
-class AVLTreeTable : public TreeTable{
-
+class AVLTreeTable : public Table{
+	AVLTree tree;
+public:
+	int insert(T obj);
+	int remove(T obj);
+	int size();
+	T find(std::string key);
+	void print();
 };
 
-#endif // !LIB_AVL_AVL_H_
+#endif // !LIB_AVLTREETABLE_AVLTREETABLE_H_
