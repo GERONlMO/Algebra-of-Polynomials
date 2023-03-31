@@ -8,7 +8,7 @@ template <class T>
 class stack {
 private:
 	T* data;
-	int Top;
+	int top;
 	int size;
 public:
 	stack();
