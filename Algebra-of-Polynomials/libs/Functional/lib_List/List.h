@@ -3,11 +3,12 @@
 
 #include <stdio.h>
 #include "..\lib_Node\Node.h"
+
 template <typename T>
 class List {
-	int Size;
-	T* last;
-	T* first;
+	int size;
+	Node<T>* last;
+	Node<T>* first;
 public:
 	List();
 	int clear() {};
@@ -17,7 +18,6 @@ public:
 	T pop_front() {};
 	int empty() {};
 	int size() {};
-
 };
 
 #endif // !LIB_LIST_LIST_H_

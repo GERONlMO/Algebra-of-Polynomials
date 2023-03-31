@@ -33,8 +33,6 @@ public:
 	bool operator<(const Monom& monom);
 	bool operator>=(const Monom& monom);
 	bool operator<=(const Monom& monom);
-
-
 };
 
 #endif // !LIB_MONOM_MONOM_H_
