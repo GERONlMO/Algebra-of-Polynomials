@@ -14,8 +14,8 @@ public:
 	Node(T key, T value);
 	T getValue();
 	T getKey();
-	void setValue();
-	void setKey();
+	void setValue(T value);
+	void setKey(T key);
 	Node* getLeft();
 	Node* getRight();
 	Node* getTop();

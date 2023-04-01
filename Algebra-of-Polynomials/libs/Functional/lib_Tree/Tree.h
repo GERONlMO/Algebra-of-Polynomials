@@ -1,6 +1,6 @@
 #ifndef LIB_TREE_TREE_H_
 #define LIB_TREE_TREE_H_
-#include "..\lib_TNode\TNode.h"
+#include "..\lib_Node\Node.h"
 template <typename T>
 class Tree { 
 public:
