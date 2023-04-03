@@ -4,8 +4,9 @@
 template <typename T>
 class Tree { 
 public:
-	virtual bool insert(T obj);
-	virtual bool remove(T obj);
-	virtual T find(std::string key);
+	virtual void create(T* source);
+	virtual void insert(T obj);
+	virtual void remove(T obj);
+	virtual T find(T key);
 };
 #endif // !LIB_TREE_TREE_H_
