@@ -30,6 +30,21 @@ void Node<T>::setKey(T key) {
 }
 
 template <typename T>
+void Node<T>::setLeft(T left) {
+	this->left = left;
+}
+
+template <typename T>
+void Node<T>::setRight(T right) {
+	this->right = right;
+}
+
+template <typename T>
+void Node<T>::setTop(T top) {
+	this->top = top;
+}
+
+template <typename T>
 Node<T>* Node<T>::getLeft() {
 	return left;
 }
