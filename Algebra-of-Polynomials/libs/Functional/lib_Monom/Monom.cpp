@@ -172,9 +172,6 @@ Monom Monom::operator*=(const Monom& monom) {
 Monom Monom::operator/(int x) {
     Monom result(*this);
     result.coeff /= x;
-    for (int i = 0; i < numVars; i++) {
-        result.powers[i] /= x;
-    }
     return result;
 }
 
@@ -189,9 +186,6 @@ Monom Monom::operator/(const Monom& monom) {
 
 Monom Monom::operator/=(int x) {
     coeff /= x;
-    for (int i = 0; i < numVars; i++) {
-        powers[i] /= x;
-    }
     return *this;
 }
 
