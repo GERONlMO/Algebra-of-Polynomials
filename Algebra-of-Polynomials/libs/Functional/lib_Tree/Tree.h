@@ -4,7 +4,7 @@
 template <typename T>
 class Tree { 
 public:
-	virtual void create(T* source);
+	virtual void create(T* source, int size);
 	virtual void insert(T obj);
 	virtual void remove(T obj);
 	virtual T find(T key);

@@ -6,12 +6,13 @@ template <typename T>
 class Node {
 	T value;
 	T key;
-	Node* left;
-	Node* right;
-	Node* top;
+	Node<T>* left;
+	Node<T>* right;
+	Node<T>* top;
 	
 public:
 	Node(T key, T value);
+    Node(T value);
 	T getValue();
 	T getKey();
 	void setValue(T value);
@@ -19,10 +20,10 @@ public:
 	void setLeft(T left);
 	void setRight(T right);
 	void setTop(T top);
-	Node* getLeft();
-	Node* getRight();
-	Node* getTop();
-	Node& operator= (const Node& node);
+	Node<T>* getLeft();
+	Node<T>* getRight();
+	Node<T>* getTop();
+	Node<T>& operator= (const Node<T>& node);
 };
 
 #endif // !LIB_NODE_NODE_H_

@@ -4,6 +4,8 @@
 cmake_minimum_required (VERSION 3.8)
 
 # название проекта
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project ("Algebra-of-Polynomials")
 
 include(cmake/function.cmake)    # подхватываем функции, реализованные в файле function.cmake
@@ -29,6 +31,7 @@ add_subdirectory ("libs/Tables/lib_AVLTreeTable")
 add_subdirectory ("libs/Tables/lib_UnorderedTable")
 add_subdirectory ("libs/Tables/lib_UnsortedTable")
 add_subdirectory ("libs/Functional/lib_Iterator")
+add_subdirectory("libs/Functional/lib_SyntaxTree")
 
 option(BTEST "build test?" OFF) # указываем подключаем ли google-тесты (ON или YES) или нет (OFF или NO)
 

@@ -1,5 +1,4 @@
 #include "SyntaxTree.h"
-
 // Реализация конструктора
 template <typename T>
 SyntaxTree<T>::SyntaxTree() {
@@ -12,17 +11,30 @@ SyntaxTree<T>::~SyntaxTree() {
     deleteTree(root);
 }
 
+// Реализация метода для создания арифметического дерева
 template <typename T>
-void SyntaxTree<T>::create(T* source) override {
-
+void SyntaxTree<T>::create(T* source, int size) {
+    for (int i = size - 1; i > 0; i--) {
+        insert(source[i]);
+    }
 }
 
 // Реализация метода для добавления узла в дерево
 template <typename T>
-void SyntaxTree<T>::insert(T obj) override {
-    root = addNodeRecursive(root, data);
+void SyntaxTree<T>::insert(T obj) {
+    root = addNodeRecursive(root, obj);
 }
 
+// Реализация метода для удаления узла из дерева
+template <typename T>
+void SyntaxTree<T>::remove(T obj) {
+
+}
+// Реализация метода для поиска значения по ключу
+template <typename T>
+T SyntaxTree<T>::find(T key) {
+
+}
 // Реализация метода для вычисления значения выражения в дереве
 template <typename T>
 int SyntaxTree<T>::evaluate() {
@@ -31,19 +43,25 @@ int SyntaxTree<T>::evaluate() {
 
 // Рекурсивный метод для добавления узла в дерево
 template <typename T>
-Node* SyntaxTree<T>::addNodeRecursive(Node* current, T data) {
+Node<T>* SyntaxTree<T>::addNodeRecursive(Node<T>* current, T data) {
     if (current == nullptr) {
-        return new Node(data);
+        return new Node<T>(data);
     }
-
-    if (current->left == nullptr) {
-        current->left = addNodeRecursive(current->left, data);
+    if (current->getRight() == nullptr) {
+        current->setRight(addNodeRecursive(current->getRight(), data));
     }
-    else if (current->right == nullptr) {
-        current->right = addNodeRecursive(current->right, data);
+    else if (current->getLeft() == nullptr) {
+        current->setLeft(addNodeRecursive(current->getLeft(), data));
     }
-    else {
-        current->left = addNodeRecursive(current->left, data);
+    else if (operationsPriority.contains(current->getRight()->getValue())) {
+        current = current->getRight();
+        current->setTop(root);
+        current->setRight(addNodeRecursive(current->getRight(), data));
+    }
+    else if (operationsPriority.contains(current->getLeft()->getValue())) {
+        current = current->getLeft();
+        current->setTop(root);
+        current->setRight(addNodeRecursive(current->getRight(), data));
     }
 
     return current;
@@ -51,7 +69,7 @@ Node* SyntaxTree<T>::addNodeRecursive(Node* current, T data) {
 
 // Рекурсивный метод для вычисления значения выражения в дереве
 template <typename T>
-int SyntaxTree<T>::evaluateRecursive(Node* current) {
+int SyntaxTree<T>::evaluateRecursive(Node<T>* current) {
     if (current == nullptr) {
         return 0;
     }
@@ -81,7 +99,7 @@ int SyntaxTree<T>::evaluateRecursive(Node* current) {
 
 // Рекурсивный метод для удаления дерева
 template <typename T>
-void SyntaxTree<T>::deleteTree(Node* current) {
+void SyntaxTree<T>::deleteTree(Node<T>* current) {
     if (current != nullptr) {
         deleteTree(current->left);
         deleteTree(current->right);

@@ -2,7 +2,7 @@
 
 template <typename T>
 List<T>::List() {
-    size = 0;
+    _size = 0;
     last = nullptr;
     first = nullptr;
 }
@@ -15,7 +15,7 @@ int List<T>::clear() {
         delete temp;
     }
     last = nullptr;
-    size = 0;
+    _size = 0;
     return 0;
 }
 
@@ -31,7 +31,7 @@ int List<T>::push_back(T obj) {
         node->setLeft(last);
         last = node;
     }
-    size++;
+    _size++;
     return 0;
 }
 
@@ -50,7 +50,7 @@ T List<T>::pop_back() {
         first = nullptr;
     }
     delete temp;
-    size--;
+    _size--;
     return result;
 }
 
@@ -66,7 +66,7 @@ int List<T>::push_front(T obj) {
         node->setRight(first);
         first = node;
     }
-    Size++;
+    _size++;
     return 0;
 }
 
@@ -85,7 +85,7 @@ T List<T>::pop_front() {
         last = nullptr;
     }
     delete temp;
-    Size--;
+    _size--;
     return result;
 }
 
@@ -96,5 +96,5 @@ int List<T>::empty() {
 
 template <typename T>
 int List<T>::size() {
-    return Size;
+    return _size;
 }
