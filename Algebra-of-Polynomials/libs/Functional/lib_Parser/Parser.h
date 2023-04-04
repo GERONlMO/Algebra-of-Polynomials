@@ -12,15 +12,7 @@ class Parser {
 	std::string infixExpression;
 	std::string postfixExpression;
 	SyntaxTree<std::string> tree;
-	std::map<char, int> operationsPriority = {
-		{'(', 0},
-		{'+', 1},
-		{'-', 1},
-		{'*', 2},
-		{'/', 2},
-		{'^', 3},
-		{'~', 4}
-	};
+
 
 	bool isDigit(char c);
 	bool containsKey(char c);
@@ -30,6 +22,7 @@ class Parser {
 	bool isCorrect();
 
 public:
+
 	Parser(std::string expression);
 
 	/// <summary>

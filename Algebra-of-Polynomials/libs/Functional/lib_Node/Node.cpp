@@ -8,7 +8,13 @@ Node<T>::Node(T key, T value) {
 	right = nullptr;
 	top = nullptr;
 }
-
+template <typename T>
+Node<T>::Node(T value) {
+    this->value = value;
+    left = nullptr;
+    right = nullptr;
+    top = nullptr;
+}
 template <typename T>
 T Node<T>::getValue() {
 	return value;
