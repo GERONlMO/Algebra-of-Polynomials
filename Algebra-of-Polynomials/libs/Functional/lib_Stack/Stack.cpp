@@ -1,22 +1,23 @@
+#include <stdexcept>
 #include "Stack.h"
 
 
 template <class T>
-stack<T>::stack() {
+Stack<T>::Stack() {
     size = 10;
-    top = -1;
+    _top = -1;
     data = new T[size];
 }
 
 template <class T>
-stack<T>::stack(int size) {
+Stack<T>::Stack(int size) {
     this->size = size;
-    top = -1;
+    _top = -1;
     data = new T[size];
 }
 
 template <class T>
-int stack<T>::push(T value) {
+int Stack<T>::push(T value) {
     if (isFull()) {
         T* newData = new T[size + 1];
         for (int i = 0; i < size; i++) {
@@ -26,20 +27,23 @@ int stack<T>::push(T value) {
         data = newData;
         size++;
     }
-    top++;
-    data[top] = value;
+    _top++;
+    data[_top] = value;
     return 1;
 }
 
 template <class T>
-int stack<T>::pop() {
-    isEmpty() ? throw string("Stack is empty") : NULL;
-    T tmp = data[top];
+int Stack<T>::pop() {
+    if (isEmpty())
+        throw std::logic_error("Stack is empty");
+    else
+        NULL;
+    T tmp = data[_top];
     T* newData = new T[size - 1];
     for (int i = 0; i < size - 1; i++) {
         newData[i] = data[i];
     }
-    top--;
+    _top--;
     size--;
     delete[] data;
     data = newData;
@@ -47,28 +51,28 @@ int stack<T>::pop() {
 }
 
 template <class T>
-bool stack<T>::isFull() {
-    return top == size - 1;
+bool Stack<T>::isFull() {
+    return _top == size - 1;
 }
 
 template <class T>
-bool stack<T>::isEmpty() {
-    return top == -1;
+bool Stack<T>::isEmpty() {
+    return _top == -1;
 }
 
 template <class T>
-T stack<T>::top() {
-    return data[top];
+T Stack<T>::top() {
+    return data[_top];
 }
 
 template <class T>
-stack<T>& stack<T>::operator=(const stack<T>& stk) {
+Stack<T>& Stack<T>::operator=(const Stack<T>& stk) {
     if (this != &stk) {
         delete[] data;
         size = stk.size;
-        top = stk.top;
+        _top = stk.top;
         data = new T[size];
-        for (int i = 0; i <= top; i++) {
+        for (int i = 0; i <= _top; i++) {
             data[i] = stk.data[i];
         }
     }

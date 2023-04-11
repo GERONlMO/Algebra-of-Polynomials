@@ -3,7 +3,7 @@
 #include "..\lib_SortedTable\SortedTable.h"
 #include "..\..\Functional\lib_List\List.h"
 template <typename T>
-class SortedArrayTable : public SortedTable {
+class SortedArrayTable : public SortedTable<T> {
 	List<T> keys;
 	List<T> values;
 public:

@@ -3,8 +3,8 @@
 #include "../../Functional/lib_AVLTree/AVLTree.h"
 #include "../lib_Table/Table.h"
 template <typename T>
-class AVLTreeTable : public Table{
-	AVLTree tree;
+class AVLTreeTable : public Table<T>{
+	AVLTree<T> tree;
 public:
 	int insert(T obj);
 	int remove(T obj);

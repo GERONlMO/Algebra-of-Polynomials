@@ -5,20 +5,20 @@
 #include <string>
 
 template <class T>
-class stack {
+class Stack {
 private:
 	T* data;
-	int top;
+	int _top;
 	int size;
 public:
-	stack();
-	stack(int size);
+	Stack();
+	Stack(int size);
 	int push(T value);
 	int pop();
 	bool isFull();
 	bool isEmpty();
 	T top();
-	stack<T>& operator=(const stack<T>& stk);
+	Stack<T>& operator=(const Stack<T>& stk);
 };
 
 #endif // !LIB_STACK_STACK_H_

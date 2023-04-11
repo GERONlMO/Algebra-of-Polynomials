@@ -2,7 +2,7 @@
 #define LIB_LINEARARRAYTABLE_LINEARARRAYTABLE_H_
 #include "..\lib_UnsortedTable\UnsortedTable.h"
 template <typename T>
-class LinearArrayTable : public UnsortedTable {
+class LinearArrayTable : public UnsortedTable<T> {
 	T* keys;
 	T* values;
 public:

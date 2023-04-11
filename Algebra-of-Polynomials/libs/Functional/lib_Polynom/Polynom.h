@@ -3,10 +3,14 @@
 #include <string>
 #include "..\lib_Monom\Monom.h"
 #include "..\lib_List\List.h"
+#include "../lib_SyntaxTree/SyntaxTree.h"
 
 class Polynom {
-	std::string polynom;
+	std::string strPolynom;
 	List<Monom> monoms;
+    SyntaxTree<std::string, Monom> tree;
+    std::string toPostfix();
+    void parseMonoms();
 public:
 	Polynom(std::string);
 	Polynom operator=(const Polynom& polynom);

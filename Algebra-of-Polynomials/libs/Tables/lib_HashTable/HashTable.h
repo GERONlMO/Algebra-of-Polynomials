@@ -2,7 +2,7 @@
 #define LIB_HASHTABLE_HASHTABLE_H_
 #include "..\lib_OrderedTable\OrderedTable.h"
 template <typename T>
-class HashTable : public OrderedTable {
+class HashTable : public OrderedTable<T> {
 public:
 	HashTable();
 	HashTable(T* source);
