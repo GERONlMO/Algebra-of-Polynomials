@@ -2,9 +2,6 @@
 #include "SyntaxTree.h"
 
 
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "UnreachableCode"
-
 // Реализация конструктора
 template <typename T, typename T1>
 SyntaxTree<T, T1>::SyntaxTree() {
@@ -120,4 +117,3 @@ std::string SyntaxTree<T, T1>::toString() {
              " " + treeRoot->getRight()->getRight()->getValue();
     return result;
 }
-#pragma clang diagnostic pop
