@@ -11,7 +11,7 @@
 class Parser {
 	std::string infixExpression;
 	std::string postfixExpression;
-	SyntaxTree<std::string> tree;
+	SyntaxTree<std::string, Monom> tree;
 
 
 	bool isDigit(char c);

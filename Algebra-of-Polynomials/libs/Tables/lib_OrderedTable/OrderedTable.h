@@ -3,7 +3,7 @@
 
 #include "..\lib_Table\Table.h"
 template <typename T>
-class OrderedTable : public Table {
+class OrderedTable : public Table<T> {
 public:
 	virtual int insert(T obj);
 	virtual int remove(T obj);

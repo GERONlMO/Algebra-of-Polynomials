@@ -6,7 +6,7 @@
 
 class Monom {
 	int coeff;
-	int* powers;
+	int* powers; // [0] = x; [1] = y; [2] = z
 	int numVars;
 public:
 	Monom();

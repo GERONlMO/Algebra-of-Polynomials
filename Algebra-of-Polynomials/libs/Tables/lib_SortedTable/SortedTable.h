@@ -3,11 +3,11 @@
 
 #include "..\lib_UnorderedTable\UnorderedTable.h"
 template <typename T>
-class SortedTable : public UnorderedTable {
+class SortedTable : public UnorderedTable<T> {
 public:
 	virtual int insert(T obj);
 	virtual int remove(T obj);
-	virtual T find(std::string key);
+	virtual T find(T key);
 	virtual void sort();
 	virtual void print();
 };
