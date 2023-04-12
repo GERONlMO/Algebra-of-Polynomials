@@ -4,6 +4,9 @@
 cmake_minimum_required (VERSION 3.8)
 
 # Добавьте источник в исполняемый файл этого проекта.
-add_executable (Algebra-of-Polynomials "Algebra-of-Polynomials.cpp" "Algebra-of-Polynomials.h")
+create_executable_project (Algebra-of-Polynomials)
+add_depend(Algebra-of-Polynomials lib_SyntaxTree "../libs/Functional/lib_SyntaxTree")
+add_depend(Algebra-of-Polynomials lib_Monom "../libs/Functional/lib_Monom")
+
 
 # TODO: Добавьте тесты и целевые объекты, если это необходимо.
