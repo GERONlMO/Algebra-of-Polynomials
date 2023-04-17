@@ -41,7 +41,7 @@ void Monom::toString() {
     std::cout << coeff;
     for (int i = 0; i < numVars; i++) {
         if (powers[i] > 0) {
-            std::cout << "x" << i << "^" << powers[i];
+            std::cout << varsName[i] << "^" << powers[i];
         }
     }
     std::cout << std::endl;

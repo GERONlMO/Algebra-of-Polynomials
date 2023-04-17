@@ -8,6 +8,7 @@ class Monom {
 	int coeff;
 	int* powers; // [0] = x; [1] = y; [2] = z
 	int numVars;
+    std::string varsName[3] = {"x", "y", "z"};
 public:
 	Monom();
 	Monom(const Monom& monom);

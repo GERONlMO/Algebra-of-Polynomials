@@ -2,47 +2,55 @@
 #define LIB_NODE_NODE_H_
 
 #include <string>
+#include <sstream>
+
 template <typename T>
 class Node {
-    std::string value;
+    T value;
 	T key;
 	Node<T>* left;
 	Node<T>* right;
 	Node<T>* top;
 	
 public:
-    Node(T key, std::string value) {
+    Node(T key, T value) {
         this->key = key;
         this->value = value;
         left = nullptr;
         right = nullptr;
         top = nullptr;
     };
-    Node(std::string value) {
+    Node(T value) {
         this->value = value;
         left = nullptr;
         right = nullptr;
         top = nullptr;
     };
-	std::string getValue() {
+
+    Node() {
+        left = nullptr;
+        right = nullptr;
+        top = nullptr;
+    }
+	T getValue() {
         return value;
     };
 	T getKey() {
         return key;
     };
-	void setValue(std::string value) {
+	void setValue(T value) {
         this->value = value;
     };
 	void setKey(T key) {
         this->key = key;
     };
-	void setLeft(T left) {
+	void setLeft(Node<T>* left) {
         this->left = left;
     };
-	void setRight(T right) {
+	void setRight(Node<T>* right) {
         this->right = right;
     };
-	void setTop(T top) {
+	void setTop(Node<T>* top) {
         this->top = top;
     };
 	Node<T>* getLeft() {
@@ -63,6 +71,12 @@ public:
         top = node.top;
         return *this;
     };
+
+    std::string toString(T t) {
+        std::ostringstream ss;
+        ss << t;
+        return ss.str();
+    }
 };
 
 #endif // !LIB_NODE_NODE_H_

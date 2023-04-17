@@ -8,72 +8,75 @@
 
 template <typename T, typename T1>
 class SyntaxTree {
-    const std::map<char, int> operationsPriority = {
-            {'(', 0},
-            {'+', 1},
-            {'-', 1},
-            {'*', 2},
-            {'/', 2},
-            {'^', 3},
-            {'~', 4}
+    const std::map<std::string, int> operationsPriority = {
+            {"(", 0},
+            {"+", 1},
+            {"-", 1},
+            {"*", 2},
+            {"/", 2},
+            {"^", 3},
+            {"~", 4}
     };
+    const std::string specialOperations[3] = {"/", "^", "-"};
+    bool flag = false;
     Stack<T> stack = Stack<T>(10);
 	Node<T>* root = nullptr;
     Node<T>* treeRoot = nullptr;
 	Node<T>* addNodeRecursive(Node<T>* current, std::string data) {
-        bool flag = false;
-
-        if (current == nullptr){
-            Node<T>* tmp(data);
+        if (current == nullptr) {
+            Node<T>* tmp = new Node<T>(data);
+            treeRoot = tmp;
             return tmp;
         }
-
-        else if (current->getRight() == nullptr) {
-            if (data == "-" || data == "/" || data == "^")
-                flag = true;
-            current->setRight(addNodeRecursive(current->getRight(), data));
+        if (current->getRight()!= nullptr && current->getLeft() != nullptr && !isOperation(current->getRight()->getValue()) && !isOperation(current->getLeft()->getValue())) current = current->getTop();
+        flag = in(current->getValue());
+        if (current->getRight() == nullptr) {
+            if (!flag) {
+                current->setRight(new Node<T>(data));
+                current->getRight()->setTop(current);
+                if (!isOperation(data)) {
+                    return current;
+                }
+                return current->getRight();
+            }
+            if (current->getLeft()!= nullptr) {
+                current->setRight(new Node<T>(data));
+                current->getRight()->setTop(current);
+                if(!isOperation(data)) {
+                    return current;
+                }
+                return current->getRight();
+            }
         }
-        else if (current->getLeft() == nullptr) {
-            if (data == "-" || data == "/" || data == "^")
-                flag = true;
-            current->setLeft(addNodeRecursive(current->getLeft(), data));
+        if (current->getLeft() == nullptr) {
+            current->setLeft(new Node<T>(data));
+            current->getLeft()->setTop(current);
+            if (!isOperation(data)) {
+                return current;
+            }
+            return current->getLeft();
         }
-        if (!operationsPriority.contains(current->getRight()->getValue()) && !operationsPriority.contains(current->getLeft()->getValue())) {
-            current = current->getTop();
-            return current;
-        }
-
-        if (flag) {
-            current = current->getLeft();
-            current->setTop(root);
-            current->setLeft(addNodeRecursive(current->getLeft(), data));
-        } else {
-            current = current->getRight();
-            current->setTop(root);
-            current->setRight(addNodeRecursive(current->getRight(), data));
-        }
-
         return current;
     };
-    void getTreeRoot() {
-        while (root->getTop() != root) root = root->getTop();
-        treeRoot = root;
-    };
+
 	void createSyntaxTreeStack(Node<T> *current) {
-        if (current == nullptr) throw std::logic_error("The tree is empty");
-        if (current->getRight() != nullptr)
-            stack.push(current->getRight()->getValue());
-        if (current->getLeft() != nullptr)
-            stack.push(current->getLeft()->getValue());
-        if (operationsPriority.contains(current->getRight()->getValue())) {
-            current = current->getRight();
-            evaluateRecursive(current);
-        }
-        if (operationsPriority.contains(current->getLeft()->getValue())) {
-            current = current->getLeft();
-            evaluateRecursive(current);
-        }
     };
+
+    std::string toStringRecursive(Node<T>* root) {
+        if (root == nullptr) {
+            return "";
+        }
+
+        std::string result = "";
+        if (root->getLeft() != nullptr || root->getRight() != nullptr) {
+            std::string leftValue = toStringRecursive(root->getLeft());
+            std::string rightValue = toStringRecursive(root->getRight());
+            result += leftValue + " " + rightValue;
+        }
+        result += " " + root->getValue();
+        return result;
+    }
+
 	void deleteTree(Node<T>* current) {
         if (current != nullptr) {
             deleteTree(current->getLeft());
@@ -81,36 +84,35 @@ class SyntaxTree {
             delete current;
         }
     };
+
+    bool in(T data) {
+        for (const auto & specialOperation : specialOperations) {
+            if (std::string(data) == specialOperation)
+                return true;
+        }
+        return false;
+    }
+    bool isOperation(T data) {
+        return operationsPriority.contains(std::string(data));
+    }
 public:
     SyntaxTree() {
-        root = nullptr;
     };
     ~SyntaxTree() {
         deleteTree(root);
     };
 
 	void create(T* source, int size) {
-        for (int i = size - 1; i > 0; i--) {
+        for (int i = size - 1; i >= 0; i--) {
             insert(source[i]);
         }
     };
 	void insert(T obj) {
         root = addNodeRecursive(root, obj);
-        getTreeRoot();
-    };
-	int evaluate() {
-        Node<T>* temp = treeRoot;
-        createSyntaxTreeStack(temp);
-        Stack<T> additional = Stack<T>(10);
-        while (!stack.isEmpty()) {
-
-        }
     };
     std::string toString() {
-        std::string result = "layout 1 - " + treeRoot->getValue() + "\n" +
-                "layout 2 - " + treeRoot->getLeft()->getValue() + " " + treeRoot->getRight()->getValue() +
-                "\nlayout 3 - " + treeRoot->getLeft()->getLeft()->getValue() + " " + treeRoot->getLeft()->getRight()->getValue() + " " + treeRoot->getRight()->getLeft()->getValue() + " " + treeRoot->getRight()->getRight()->getValue();
-        return result;
+        return toStringRecursive(treeRoot);
     };
+
 };
 #endif // !LIB_SYNTAXTREE_SYNTAXTREE_H_
