@@ -20,11 +20,11 @@ class SyntaxTree {
     Stack<T> stack = Stack<T>(10);
 	Node<T>* root = nullptr;
     Node<T>* treeRoot = nullptr;
-	Node<T>* addNodeRecursive(Node<T>* current, std::string data) {
+	Node<T>* addNodeRecursive(Node<T>* current, T data) {
         bool flag = false;
 
         if (current == nullptr){
-            Node<T>* tmp(data);
+            Node<T>* tmp = new Node<T>(data);
             return tmp;
         }
 
