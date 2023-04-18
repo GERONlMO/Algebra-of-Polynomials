@@ -2,6 +2,8 @@
 #define LIB_NODE_NODE_H_
 
 #include <string>
+#include <sstream>
+
 template <typename T>
 class Node {
     T value;
@@ -24,7 +26,13 @@ public:
         right = nullptr;
         top = nullptr;
     };
-    T getValue() {
+    Node() {
+        left = nullptr;
+        right = nullptr;
+        top = nullptr;
+    }
+	T getValue() {
+
         return value;
     };
 	T getKey() {
@@ -63,6 +71,12 @@ public:
         top = node.top;
         return *this;
     };
+
+    std::string toString(T t) {
+        std::ostringstream ss;
+        ss << t;
+        return ss.str();
+    }
 };
 
 #endif // !LIB_NODE_NODE_H_
