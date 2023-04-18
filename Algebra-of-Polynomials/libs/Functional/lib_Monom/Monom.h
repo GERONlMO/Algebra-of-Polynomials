@@ -5,17 +5,18 @@
 #include <string>
 
 class Monom {
-	int coeff;
-	int* powers; // [0] = x; [1] = y; [2] = z
+	double coeff;
+	int* powers;
 	int numVars;
-    std::string varsName[3] = {"x", "y", "z"};
+  std::string varsName[3] = {"x", "y", "z"};
 public:
 	Monom();
 	Monom(const Monom& monom);
-	Monom(int coeff, int numVars, int* powers);
+	Monom(double coeff, int numVars, int* powers);
 	~Monom();
-	int getCoeff();
+	double getCoeff();
 	int* getPowers();
+	int getNumVars();
 	void toString();
 	Monom& operator=(const Monom& monom);
 	Monom operator+(const Monom& monom);

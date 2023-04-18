@@ -26,13 +26,13 @@ public:
         right = nullptr;
         top = nullptr;
     };
-
     Node() {
         left = nullptr;
         right = nullptr;
         top = nullptr;
     }
 	T getValue() {
+
         return value;
     };
 	T getKey() {

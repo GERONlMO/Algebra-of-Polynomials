@@ -1,8 +1,7 @@
 #include "../lib_Monom/Monom.h"
 
-
 Monom::Monom() {
-    coeff = 0;
+    coeff = 0.0;
     powers = nullptr;
     numVars = 0;
 }
@@ -16,7 +15,7 @@ Monom::Monom(const Monom& monom) {
     }
 }
 
-Monom::Monom(int coeff, int numVars, int* powers) {
+Monom::Monom(double coeff, int numVars, int* powers) {
     this->coeff = coeff;
     this->numVars = numVars;
     this->powers = new int[numVars];
@@ -29,12 +28,16 @@ Monom::~Monom() {
     delete[] powers;
 }
 
-int Monom::getCoeff() {
+double Monom::getCoeff() {
     return coeff;
 }
 
 int* Monom::getPowers() {
     return powers;
+}
+
+int Monom::getNumVars() {
+    return numVars;
 }
 
 void Monom::toString() {
@@ -44,7 +47,6 @@ void Monom::toString() {
             std::cout << varsName[i] << "^" << powers[i];
         }
     }
-    std::cout << std::endl;
 }
 
 Monom& Monom::operator=(const Monom& monom) {
