@@ -18,6 +18,7 @@ int main()
     string value = "value";
     Node<string> node = Node(key, value);
     cout << node.getKey() << " " << node.getValue() << endl;
+    cout << "Test";
 
     string pol = "3.2x^2y^3z - 1.3xz^4 + 1.3xz^4";
     Polynom polynom1 = Polynom(pol);
