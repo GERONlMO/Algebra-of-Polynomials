@@ -2,13 +2,13 @@
 #define LIB_SORTEDTABLE_SORTEDTABLE_H_
 
 #include "..\lib_UnorderedTable\UnorderedTable.h"
-template <typename T>
-class SortedTable : public UnorderedTable<T> {
-public:
-	virtual int insert(T obj);
-	virtual int remove(T obj);
-	virtual T find(T key);
+template <typename TKey, typename TValue>
+class SortedTable : public UnorderedTable<TKey, TValue> {
 	virtual void sort();
+public:
+	virtual int insert(TKey key, TValue value);
+	virtual int remove(TKey key);
+	virtual TValue find(TKey key);
 	virtual void print();
 };
 #endif // !LIB_SORTEDTABLE_SORTEDTABLE_H_

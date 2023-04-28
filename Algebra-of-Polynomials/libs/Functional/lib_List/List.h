@@ -39,6 +39,38 @@ public:
 		return current->getValue();
 	}
 
+	int remove(T obj) {
+		Node<T>* current = first;
+		while (current != nullptr) {
+			if (current->getValue() == obj) {
+				if (current == first) {
+					first = current->getRight();
+					if (first != nullptr) {
+						first->setLeft(nullptr);
+					}
+					else {
+						last = nullptr;
+					}
+				}
+				else if (current == last) {
+					last = current->getLeft();
+					last->setRight(nullptr);
+				}
+				else {
+					Node<T>* left = current->getLeft();
+					Node<T>* right = current->getRight();
+					left->setRight(right);
+					right->setLeft(left);
+				}
+				delete current;
+				_size--;
+				return 0;
+			}
+			current = current->getRight();
+		}
+		throw "Object not found";
+	};
+
 	int clear() {
 		while (first != nullptr) {
 			Node<T>* temp = first;

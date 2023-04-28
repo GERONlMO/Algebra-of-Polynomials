@@ -1,19 +1,19 @@
 #ifndef LIB_LINEARARRAYTABLE_LINEARARRAYTABLE_H_
 #define LIB_LINEARARRAYTABLE_LINEARARRAYTABLE_H_
+
 #include "..\lib_UnsortedTable\UnsortedTable.h"
-template <typename T>
-class LinearArrayTable : public UnsortedTable<T> {
-	T* keys;
-	T* values;
+template <typename TKey, typename TValue>
+class LinearArrayTable : public UnsortedTable<TKey, TValue> {
+	size_t size;
+	size_t count;
+	TTableRecord<TKey, TValue>* data;
 public:
 	LinearArrayTable();
-	LinearArrayTable(T* source);
 	~LinearArrayTable();
-	//LinearArrayTable(const LinearArrayTable& table);
-	int insert(T obj);
-	int remove(T obj);
-	T find(std::string key);
-	void print();
+	virtual int insert(TKey key, TValue value) override;
+	virtual int remove(TKey key) override;
+	virtual TValue find(TKey key) override;
+	virtual void print() override;
 };
 
 #endif // !LIB_LINEARARRAYTABLE_LINEARARRAYTABLE_H_
