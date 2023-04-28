@@ -2,13 +2,14 @@
 #define LIB_TABLE_TABLE_H_
 
 #include <iostream>
-template <typename T>
+#include "TTableRecord.h"
+template <typename TKey, typename TValue>
 class Table {
 public:
-	virtual int insert(T obj);
-	virtual int remove(T obj);
-	virtual T find(std::string key);
-	virtual void print();
+    virtual int insert(TKey key, TValue value) = 0;
+    virtual int remove(TKey key) = 0;
+    virtual TValue find(TKey key) = 0;
+    virtual void print() = 0;
 };
 
 #endif // !LIB_TABLE_TABLE_H_
