@@ -4,11 +4,11 @@
 #include "..\lib_UnorderedTable\UnorderedTable.h"
 template <typename TKey, typename TValue>
 class SortedTable : public UnorderedTable<TKey, TValue> {
-	virtual void sort();
+	virtual void sort() = 0;
 public:
-	virtual int insert(TKey key, TValue value);
-	virtual int remove(TKey key);
-	virtual TValue find(TKey key);
-	virtual void print();
+	virtual int insert(TKey key, TValue value) = 0;
+	virtual int remove(TKey key) = 0;
+	virtual TValue find(TKey key) = 0;
+	virtual void print() = 0;
 };
 #endif // !LIB_SORTEDTABLE_SORTEDTABLE_H_
