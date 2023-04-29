@@ -8,6 +8,8 @@ create_executable_project (Algebra-of-Polynomials)
 add_depend(Algebra-of-Polynomials lib_SyntaxTree "../libs/Functional/lib_SyntaxTree")
 add_depend(Algebra-of-Polynomials lib_Monom "../libs/Functional/lib_Monom")
 add_depend(Algebra-of-Polynomials lib_Polynom "../libs/Functional/lib_Polynom")
+add_depend(Algebra-of-Polynomials lib_OpenShuffleTable "../libs/Tables/lib_OpenShuffleTable")
+add_depend(Algebra-of-Polynomials lib_ChainMethodTable "../libs/Tables/lib_ChainMethodTable")
 
 
 # TODO: Добавьте тесты и целевые объекты, если это необходимо.

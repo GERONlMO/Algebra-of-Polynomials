@@ -2,13 +2,13 @@
 #define LIB_ORDEREDTABLE_ORDEREDTABLE_H_
 
 #include "..\lib_Table\Table.h"
-template <typename T>
-class OrderedTable : public Table<T> {
+template <typename TKey, typename TValue>
+class OrderedTable : public Table<TKey, TValue> {
 public:
-	virtual int insert(T obj);
-	virtual int remove(T obj);
-	virtual T find(std::string key);
-	virtual void print();
+    virtual int insert(TKey key, TValue value) = 0;
+    virtual int remove(TKey key) = 0;
+    virtual TValue find(TKey key) = 0;
+    virtual void print() = 0;
 };
 
 #endif // !LIB_ORDEREDTABLE_ORDEREDTABLE_H_
