@@ -5,8 +5,8 @@
 #include "..\..\Functional\lib_List\List.h"
 template <typename TKey, typename TValue>
 class SortedArrayTable : public SortedTable<TKey, TValue> {
-	size_t size;
-	size_t count;
+	int size;
+	int count;
 	TTableRecord<TKey, TValue>* data;
 
 	virtual void sort() override;

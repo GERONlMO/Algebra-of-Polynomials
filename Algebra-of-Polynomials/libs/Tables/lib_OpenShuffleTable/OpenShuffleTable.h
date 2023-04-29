@@ -7,9 +7,9 @@ class OpenShuffleTable : public HashTable<TKey, TValue> {
     int count;
     int size;
     double loadFactor;
-    int hash(TKey key);
     int findFreeIndex(TKey key);
-    void resize(int newSize);
+    virtual int hash(TKey key);
+    virtual void resize(int newSize);
     TTableRecord<TKey, TValue>* table;
 public:
     OpenShuffleTable();
@@ -97,7 +97,7 @@ int OpenShuffleTable<TKey, TValue>::findFreeIndex(TKey key) {
     int index = hash(key);
     int startIndex = index;
     do {
-        if (table[index].key == key || (!table[index].isEmpty())) {
+        if (table[index].key == key || table[index].key == TKey()) {
             // Если нашли элемент с таким же ключом или элемент без ключа,
             // то возвращаем индекс
             return index;
@@ -111,12 +111,12 @@ int OpenShuffleTable<TKey, TValue>::findFreeIndex(TKey key) {
 template <typename TKey, typename TValue>
 void OpenShuffleTable<TKey, TValue>::resize(int newSize) {
     TTableRecord<TKey, TValue>* newTable = new TTableRecord<TKey, TValue>[newSize];
-    for (int i = 0; i < newSize; ++i) {
+    for (int i = 0; i < newSize; i++) {
         newTable[i].key = TKey();
         newTable[i].value = TValue();
     }
     int newCount = 0;
-    for (int i = 0; i < size; ++i) {
+    for (int i = 0; i < size; i++) {
         if (table[i].key != TKey()) {
             int newIndex = findFreeIndex(table[i].key);
             newTable[newIndex].key = table[i].key;
