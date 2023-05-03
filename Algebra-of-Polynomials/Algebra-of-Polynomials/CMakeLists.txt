@@ -12,5 +12,6 @@ add_depend(Algebra-of-Polynomials lib_OpenShuffleTable "../libs/Tables/lib_OpenS
 add_depend(Algebra-of-Polynomials lib_ChainMethodTable "../libs/Tables/lib_ChainMethodTable")
 add_depend(Algebra-of-Polynomials lib_LinearListTable "../libs/Tables/lib_LinearListTable")
 add_depend(Algebra-of-Polynomials lib_LinearArrayTable "../libs/Tables/lib_LinearArrayTable")
+add_depend(Algebra-of-Polynomials lib_SortedArrayTable "../libs/Tables/lib_SortedArrayTable")
 
 # TODO: Добавьте тесты и целевые объекты, если это необходимо.

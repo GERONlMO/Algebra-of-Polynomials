@@ -7,6 +7,7 @@
 #include "OpenShuffleTable.h"
 #include "LinearListTable.h"
 #include "LinearArrayTable.h"
+#include "SortedArrayTable.h"
 
 using namespace std;
 
@@ -58,7 +59,7 @@ int main()
     LinearListTable<int, std::string> linearListTable;*/
 
 
-    LinearArrayTable<std::string, std::string> linearArrayTable;
+    /*LinearArrayTable<std::string, std::string> linearArrayTable;
 
     linearArrayTable.insert("1", "one");
     linearArrayTable.insert("2", "two");
@@ -70,7 +71,22 @@ int main()
 
     cout << endl;
     linearArrayTable.print();
-    cout << endl << endl << endl << endl;
+    cout << endl << endl << endl << endl;*/
+
+    SortedArrayTable<std::string, std::string> sortedArrayTable;
+    sortedArrayTable.insert("1", "one");
+    sortedArrayTable.insert("6", "six");
+    sortedArrayTable.insert("3", "three");
+    sortedArrayTable.insert("2", "two");
+    sortedArrayTable.print();
+
+    cout << endl << endl;
+    sortedArrayTable.remove("3");
+    sortedArrayTable.print();
+
+    cout << endl << endl;
+    sortedArrayTable.find("4");
+    sortedArrayTable.print();
 
 	return 0;
 }
