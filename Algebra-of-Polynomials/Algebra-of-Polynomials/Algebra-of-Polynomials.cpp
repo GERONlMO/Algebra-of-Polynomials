@@ -6,6 +6,7 @@
 #include "ChainMethodTable.h"
 #include "OpenShuffleTable.h"
 #include "LinearListTable.h"
+#include "LinearArrayTable.h"
 
 using namespace std;
 
@@ -27,7 +28,8 @@ int main()
     polynom1.toString();
     cout << endl << endl;
 
-    ChainMethodTable<int, std::string> chainTable;
+
+    /*ChainMethodTable<int, std::string> chainTable;
 
     chainTable.insert(1, "one");
     chainTable.insert(2, "two");
@@ -53,9 +55,22 @@ int main()
     shuffleTable.print();
     cout << endl << endl << endl << endl;
 
-    LinearListTable<int, std::string> linearListTable;
+    LinearListTable<int, std::string> linearListTable;*/
 
 
+    LinearArrayTable<std::string, std::string> linearArrayTable;
+
+    linearArrayTable.insert("1", "one");
+    linearArrayTable.insert("2", "two");
+    linearArrayTable.insert("3", "three");
+    linearArrayTable.insert("6", "six");
+    linearArrayTable.print();
+    cout << endl << endl;
+    linearArrayTable.find("4");
+
+    cout << endl;
+    linearArrayTable.print();
+    cout << endl << endl << endl << endl;
 
 	return 0;
 }
