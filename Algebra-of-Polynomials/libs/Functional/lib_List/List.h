@@ -29,46 +29,56 @@ public:
 	}
 
 	T get(int index) {
-		if (index < 0 || index >= _size) {
-			throw std::out_of_range("Index out of range");
+		try {
+			if (index < 0 || index >= _size) {
+				throw std::out_of_range("Index out of range");
+			}
+			Node<T>* current = first;
+			for (int i = 0; i < index; i++) {
+				current = current->getRight();
+			}
+			return current->getValue();
 		}
-		Node<T>* current = first;
-		for (int i = 0; i < index; i++) {
-			current = current->getRight();
+		catch (const std::exception& ex) {
+			std::cerr << "Error:" << ex.what() << std::endl;
 		}
-		return current->getValue();
 	}
 
 	int remove(T obj) {
-		Node<T>* current = first;
-		while (current != nullptr) {
-			if (current->getValue() == obj) {
-				if (current == first) {
-					first = current->getRight();
-					if (first != nullptr) {
-						first->setLeft(nullptr);
+		try {
+			Node<T>* current = first;
+			while (current != nullptr) {
+				if (current->getValue() == obj) {
+					if (current == first) {
+						first = current->getRight();
+						if (first != nullptr) {
+							first->setLeft(nullptr);
+						}
+						else {
+							last = nullptr;
+						}
+					}
+					else if (current == last) {
+						last = current->getLeft();
+						last->setRight(nullptr);
 					}
 					else {
-						last = nullptr;
+						Node<T>* left = current->getLeft();
+						Node<T>* right = current->getRight();
+						left->setRight(right);
+						right->setLeft(left);
 					}
+					delete current;
+					_size--;
+					return 0;
 				}
-				else if (current == last) {
-					last = current->getLeft();
-					last->setRight(nullptr);
-				}
-				else {
-					Node<T>* left = current->getLeft();
-					Node<T>* right = current->getRight();
-					left->setRight(right);
-					right->setLeft(left);
-				}
-				delete current;
-				_size--;
-				return 0;
+				current = current->getRight();
 			}
-			current = current->getRight();
+			throw std::runtime_error("This object not found");
 		}
-		throw "Object not found";
+		catch (const std::exception& ex) {
+			std::cerr << "Error:" << ex.what() << std::endl;
+		}
 	};
 
 	int clear() {
@@ -105,21 +115,26 @@ public:
 	};
 
 	T pop_back() {
-		if (last == nullptr) {
-			throw "List is empty";
+		try {
+			if (last == nullptr) {
+				throw std::runtime_error("List is empty");
+			}
+			T result = last->getValue();
+			Node<T>* temp = last;
+			last = last->getLeft();
+			if (last != nullptr) {
+				last->setRight(nullptr);
+			}
+			else {
+				first = nullptr;
+			}
+			delete temp;
+			_size--;
+			return result;
 		}
-		T result = last->getValue();
-		Node<T>* temp = last;
-		last = last->getLeft();
-		if (last != nullptr) {
-			last->setRight(nullptr);
+		catch (const std::exception& ex) {
+			std::cerr << "Error:" << ex.what() << std::endl;
 		}
-		else {
-			first = nullptr;
-		}
-		delete temp;
-		_size--;
-		return result;
 	};
 
 	int push_front(T obj) {
@@ -138,21 +153,26 @@ public:
 	};
 
 	T pop_front() {
-		if (first == nullptr) {
-			throw "List is empty";
+		try {
+			if (first == nullptr) {
+				throw std::runtime_error("List is empty");
+			}
+			T result = first->getValue();
+			Node<T>* temp = first;
+			first = first->getRight();
+			if (first != nullptr) {
+				first->setLeft(nullptr);
+			}
+			else {
+				last = nullptr;
+			}
+			delete temp;
+			_size--;
+			return result;
 		}
-		T result = first->getValue();
-		Node<T>* temp = first;
-		first = first->getRight();
-		if (first != nullptr) {
-			first->setLeft(nullptr);
+		catch (const std::exception& ex) {
+			std::cerr << "Error:" << ex.what() << std::endl;
 		}
-		else {
-			last = nullptr;
-		}
-		delete temp;
-		_size--;
-		return result;
 	};
 
 	int empty() {

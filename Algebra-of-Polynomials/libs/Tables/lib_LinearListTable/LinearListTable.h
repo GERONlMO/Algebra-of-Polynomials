@@ -24,25 +24,34 @@ int LinearListTable<TKey, TValue>::insert(TKey key, TValue value) {
 
 template <typename TKey, typename TValue>
 int LinearListTable<TKey, TValue>::remove(TKey key) {
-    for (int i = 0; i < data.size(); i++) {
-        if (data.get(i).key == key) {
-            data.remove(data.get(i));
-            return 0;
+    try {
+        for (int i = 0; i < data.size(); i++) {
+            if (data.get(i).key == key) {
+                data.remove(data.get(i));
+                return 0;
+            }
         }
+        throw std::runtime_error("This object not found");
     }
-
-    throw "Object not found";
+    catch (const std::exception& ex) {
+        std::cerr << "Error:" << ex.what() << std::endl;
+    }
 }
 
 template <typename TKey, typename TValue>
 TValue LinearListTable<TKey, TValue>::find(TKey key) {
-    for (int i = 0; i < data.size(); i++) {
-        if (data.get(i).key == key) {
-            return data.get(i).value;
+    try {
+        for (int i = 0; i < data.size(); i++) {
+            if (data.get(i).key == key) {
+                return data.get(i).value;
+            }
         }
+        throw std::runtime_error("This object not found");
     }
-
-    throw "Object not found";
+    catch (const std::exception& ex) {
+        std::cerr << "Error:" << ex.what() << std::endl;
+        return TValue();
+    }
 }
 
 template <typename TKey, typename TValue>

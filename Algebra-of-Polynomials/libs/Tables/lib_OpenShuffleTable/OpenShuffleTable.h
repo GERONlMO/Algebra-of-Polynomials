@@ -10,7 +10,7 @@ class OpenShuffleTable : public HashTable<TKey, TValue> {
     int findFreeIndex(TKey key);
     virtual int hash(TKey key);
     virtual void resize(int newSize);
-    TTableRecord<TKey, TValue>* table;
+    TTableRecord<TKey, TValue>* data;
 public:
     OpenShuffleTable();
     ~OpenShuffleTable();
@@ -25,12 +25,12 @@ OpenShuffleTable<TKey, TValue>::OpenShuffleTable() {
     size = 100; // начальный размер таблицы
     count = 0; // количество элементов в таблице
     loadFactor = 0.7; // максимальная загрузка таблицы
-    table = new TTableRecord<TKey, TValue>[size];
+    data = new TTableRecord<TKey, TValue>[size];
 }
 
 template <typename TKey, typename TValue>
 OpenShuffleTable<TKey, TValue>::~OpenShuffleTable() {
-    delete[] table;
+    delete[] data;
 }
 
 template <typename TKey, typename TValue>
@@ -44,7 +44,7 @@ int OpenShuffleTable<TKey, TValue>::insert(TKey key, TValue value) {
     if (index != -1) {
         // Если нашли свободный индекс, то вставляем элемент
         TTableRecord<TKey, TValue> record = { key, value };
-        table[index] = record;
+        data[index] = record;
         count++;
     }
 
@@ -53,35 +53,44 @@ int OpenShuffleTable<TKey, TValue>::insert(TKey key, TValue value) {
 
 template <typename TKey, typename TValue>
 int OpenShuffleTable<TKey, TValue>::remove(TKey key) {
-    int index = findFreeIndex(key);
-    if (index != -1) {
-        // Если нашли элемент с таким же ключом, то удаляем его
-        table[index] = TTableRecord<TKey, TValue>(TKey(), TValue());
-        count--;
-        return 0;
+    try {
+        int index = findFreeIndex(key);
+        if (index != -1) {
+            // Если нашли элемент с таким же ключом, то удаляем его
+            data[index] = TTableRecord<TKey, TValue>(TKey(), TValue());
+            count--;
+            return 0;
+        }
+        throw std::runtime_error("This object not found");
     }
-
-    throw "Object not found";
+    catch (const std::exception& ex) {
+        std::cerr << "Error:" << ex.what() << std::endl;
+    }
 }
 
 template <typename TKey, typename TValue>
 TValue OpenShuffleTable<TKey, TValue>::find(TKey key) {
-    int index = findFreeIndex(key);
-    if (index != -1) {
-        // Если нашли элемент с таким же ключом, то возвращаем его значение
-        return table[index].value;
+    try {
+        int index = findFreeIndex(key);
+        if (index != -1) {
+            // Если нашли элемент с таким же ключом, то возвращаем его значение
+            return data[index].value;
+        }
+        // Если элемент не найден, то возвращаем ошибку
+        throw std::runtime_error("This object not found");
     }
-    // Если элемент не найден, то возвращаем ошибку
-    throw "Object not found";
+    catch (const std::exception& ex) {
+        std::cerr << "Error:" << ex.what() << std::endl;
+    }
 }
 
 template <typename TKey, typename TValue>
 void OpenShuffleTable<TKey, TValue>::print() {
     std::cout << "{ ";
     for (int i = 0; i < size; i++) {
-        if (table[i].key != TKey()) {
+        if (data[i].key != TKey()) {
             
-            std::cout << "(" << table[i].key << ", " << table[i].value << ") ";
+            std::cout << "(" << data[i].key << ", " << data[i].value << ") ";
         }
     }
     std::cout << "}" << std::endl;
@@ -97,7 +106,7 @@ int OpenShuffleTable<TKey, TValue>::findFreeIndex(TKey key) {
     int index = hash(key);
     int startIndex = index;
     do {
-        if (table[index].key == key || table[index].key == TKey()) {
+        if (data[index].key == key || data[index].key == TKey()) {
             // Если нашли элемент с таким же ключом или элемент без ключа,
             // то возвращаем индекс
             return index;
@@ -110,22 +119,22 @@ int OpenShuffleTable<TKey, TValue>::findFreeIndex(TKey key) {
 
 template <typename TKey, typename TValue>
 void OpenShuffleTable<TKey, TValue>::resize(int newSize) {
-    TTableRecord<TKey, TValue>* newTable = new TTableRecord<TKey, TValue>[newSize];
+    TTableRecord<TKey, TValue>* newData = new TTableRecord<TKey, TValue>[newSize];
     for (int i = 0; i < newSize; i++) {
-        newTable[i].key = TKey();
-        newTable[i].value = TValue();
+        newData[i].key = TKey();
+        newData[i].value = TValue();
     }
     int newCount = 0;
     for (int i = 0; i < size; i++) {
-        if (table[i].key != TKey()) {
-            int newIndex = findFreeIndex(table[i].key);
-            newTable[newIndex].key = table[i].key;
-            newTable[newIndex].value = table[i].value;
+        if (data[i].key != TKey()) {
+            int newIndex = findFreeIndex(data[i].key);
+            newData[newIndex].key = data[i].key;
+            newData[newIndex].value = data[i].value;
             ++newCount;
         }
     }
-    delete[] table;
-    table = newTable;
+    delete[] data;
+    data = newData;
     size = newSize;
     count = newCount;
 }
