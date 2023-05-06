@@ -6,9 +6,6 @@
 
 class Polynom {
     List<Monom> monoms;
-    std::string signs;
-
-    void stringInMonom(std::string strMonom);
 public:
     Polynom(std::string);
     Polynom(const Polynom& polynom);
@@ -30,7 +27,7 @@ public:
     bool operator>=(const Polynom& polynom);
     bool operator<=(const Polynom& polynom);
 
-    void toString();
+    std::string toString();
 
     int at(int x);
     Polynom derivative();

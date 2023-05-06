@@ -31,7 +31,7 @@ public:
         right = nullptr;
         top = nullptr;
     }
-	T getValue() {
+	T& getValue() {
 
         return value;
     };

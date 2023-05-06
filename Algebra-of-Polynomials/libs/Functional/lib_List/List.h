@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include "..\lib_Node\Node.h"
+#include "..\lib_Monom\Monom.h"
 
 template <typename T>
 class List {
@@ -28,7 +29,7 @@ public:
 		}
 	}
 
-	T get(int index) {
+	T& get(int index) {
 		if (index < 0 || index >= _size) {
 			throw std::out_of_range("Index out of range");
 		}
@@ -39,7 +40,7 @@ public:
 		return current->getValue();
 	}
 
-	int remove(T obj) {
+	int remove(const T& obj) {
 		Node<T>* current = first;
 		while (current != nullptr) {
 			if (current->getValue() == obj) {
@@ -162,6 +163,18 @@ public:
 	int size() {
 		return _size;
 	};
+    int contains(Monom monom) {
+        Node<T>* current = first;
+        int index = 0;
+        while (current != nullptr) {
+            if (std::abs(static_cast<Monom>(current->getValue()).getCoeff()) == std::abs(monom.getCoeff())) {
+                return index;
+            }
+            index++;
+            current = current->getRight();
+        }
+        return -1;
+    }
 };
 
 #endif // !LIB_LIST_LIST_H_
