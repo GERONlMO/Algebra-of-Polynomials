@@ -8,7 +8,7 @@ Parser::Parser(std::string expression) {
     targetExpression = expression;
     removeSpaces();
 }
-
+//COMPLETED
 List<Monom> Parser::parse() {
      std::string delimeter = "+-";
      std::string token;
@@ -41,11 +41,11 @@ List<Monom> Parser::parse() {
 }
 
 
-//CHECK
+//COMPLETED
 void Parser::removeSpaces() {
     targetExpression.erase(std::remove(targetExpression.begin(), targetExpression.end(), ' '), targetExpression.end());
 }
-//REWORK
+//COMPLETED
 void Parser::parseMonom(std::string monom) {
     double coeff = 1;
     int numVars = 3;

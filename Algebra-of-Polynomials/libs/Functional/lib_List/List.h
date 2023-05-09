@@ -73,6 +73,8 @@ public:
 					}
 					delete current;
 					_size--;
+                    if (_size == 0)
+                        clear();
 					return 0;
 				}
 				current = current->getRight();
@@ -177,7 +179,7 @@ public:
 		}
 	};
 
-	int empty() {
+	bool empty() {
 		return first == nullptr;
 	};
 

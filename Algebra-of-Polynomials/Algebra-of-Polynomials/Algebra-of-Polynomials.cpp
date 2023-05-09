@@ -25,11 +25,22 @@ int main()
     Polynom polynom2 = Polynom("-3.2x^2y^3z");
     cout << "Polynom2 = " << polynom2.toString() << endl;
 
-//    Polynom plusPolynom = polynom1 + polynom2;
-//    cout << "Polynom1 + Polynom2 = " << plusPolynom.toString() << endl;
+    Polynom polynom3 = Polynom("-1.3xz^4");
+    cout << "Polynom3 = " << polynom3.toString() << endl;
+
+    cout << "Polynom1 at (1,1,1) = " << polynom1.evaluate(1,1,1) << endl;
+
+    Polynom plusPolynom = polynom1 + polynom2;
+    cout << "Polynom1 + Polynom2 = " << plusPolynom.toString() << endl;
 
     Polynom minusPolynom = polynom1 - polynom2;
     cout << "Polynom1 - Polynom2 = " << minusPolynom.toString() << endl;
+
+    Polynom multPolynom = polynom1 * 10;
+    cout << "Polynom1 * 10 = " << multPolynom.toString() << endl;
+
+    Polynom multPPolynom = polynom1 * polynom3;
+    cout << "Polynom1 * Polynom3 = " << multPPolynom.toString() << endl;
    /* string key = "key";
     string value = "value";
     Node<string> node = Node(key, value);

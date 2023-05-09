@@ -17,8 +17,10 @@ public:
 	Monom(double coeff, int numVars, int* powers);
 	~Monom();
 	double getCoeff();
+    void setCoeff(double coeff);
 	int* getPowers();
 	int getNumVars();
+    double evaluate(double x, double y, double z);
 	std::string toString();
 	Monom& operator=(const Monom& monom);
 	Monom operator+(const Monom& monom);

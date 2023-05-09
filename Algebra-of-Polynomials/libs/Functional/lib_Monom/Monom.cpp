@@ -56,7 +56,7 @@ std::string Monom::printPowers() {
     for(int i = 0; i < numVars; i++) {
         if (powers[i] > 1) {
             out += varsName[i] + "^" + std::to_string(powers[i]);
-        } else {
+        } else if (powers[i] > 0){
             out += varsName[i];
         }
     }
@@ -235,5 +235,13 @@ bool Monom::isEqual(Monom monom) {
         }
     }
     return true;
+}
+
+void Monom::setCoeff(double coeff) {
+    this->coeff = coeff;
+}
+
+double Monom::evaluate(double x, double y, double z) {
+    return coeff * pow(x, powers[0]) * pow(y, powers[1]) * pow(z, powers[2]);
 }
 
