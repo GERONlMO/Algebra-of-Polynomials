@@ -18,19 +18,38 @@ int main()
     monom.toString();
     cout << endl;
 
-    string key = "key";
+    string pol1 = "3.2x^2y^3z - 1.3xz^4 + 1.3xz^4";
+    Polynom polynom1 = Polynom(pol1);
+    cout << "Polynom1 = " << polynom1.toString() << endl;
+
+    Polynom polynom2 = Polynom("-3.2x^2y^3z");
+    cout << "Polynom2 = " << polynom2.toString() << endl;
+
+    Polynom polynom3 = Polynom("-1.3xz^4");
+    cout << "Polynom3 = " << polynom3.toString() << endl;
+
+    cout << "Polynom1 at (1,1,1) = " << polynom1.evaluate(1,1,1) << endl;
+
+    Polynom plusPolynom = polynom1 + polynom2;
+    cout << "Polynom1 + Polynom2 = " << plusPolynom.toString() << endl;
+
+    Polynom minusPolynom = polynom1 - polynom2;
+    cout << "Polynom1 - Polynom2 = " << minusPolynom.toString() << endl;
+
+    Polynom multPolynom = polynom1 * 10;
+    cout << "Polynom1 * 10 = " << multPolynom.toString() << endl;
+
+    Polynom multPPolynom = polynom1 * polynom3;
+    cout << "Polynom1 * Polynom3 = " << multPPolynom.toString() << endl;
+   /* string key = "key";
     string value = "value";
     Node<string> node = Node(key, value);
     cout << node.getKey() << " " << node.getValue() << endl;
     cout << "Test";
 
-    string pol1 = "3.2x^2y^3z - 1.3xz^4";
-    Polynom polynom1 = Polynom(pol1);
-    polynom1.toString();
-    cout << endl << endl;
 
 
-    /*ChainMethodTable<int, std::string> chainTable;
+    ChainMethodTable<int, std::string> chainTable;
 
     chainTable.insert(1, "one");
     chainTable.insert(2, "two");
@@ -56,10 +75,10 @@ int main()
     shuffleTable.print();
     cout << endl << endl << endl << endl;
 
-    LinearListTable<int, std::string> linearListTable;*/
+    LinearListTable<int, std::string> linearListTable;
 
 
-    /*LinearArrayTable<std::string, std::string> linearArrayTable;
+    LinearArrayTable<std::string, std::string> linearArrayTable;
 
     linearArrayTable.insert("1", "one");
     linearArrayTable.insert("2", "two");
@@ -71,7 +90,7 @@ int main()
 
     cout << endl;
     linearArrayTable.print();
-    cout << endl << endl << endl << endl;*/
+    cout << endl << endl << endl << endl;
 
     SortedArrayTable<std::string, std::string> sortedArrayTable;
     sortedArrayTable.insert("1", "one");
@@ -86,7 +105,7 @@ int main()
 
     cout << endl << endl;
     sortedArrayTable.find("4");
-    sortedArrayTable.print();
+    sortedArrayTable.print();*/
 
 	return 0;
 }

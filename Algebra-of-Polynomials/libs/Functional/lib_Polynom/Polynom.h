@@ -6,10 +6,8 @@
 
 class Polynom {
     List<Monom> monoms;
-    std::string signs;
-
-    void stringInMonom(std::string strMonom);
 public:
+    Polynom() = default;
     Polynom(std::string);
     Polynom(const Polynom& polynom);
     ~Polynom();
@@ -19,9 +17,9 @@ public:
     Polynom operator+(const Polynom& polynom);
     Polynom operator-(const Monom& monom);
     Polynom operator-(const Polynom& polynom);
-    Polynom operator*(const int* x);
+    Polynom operator*(const double x);
     Polynom operator*(const Polynom& polynom);
-    Polynom operator/(const int* x);
+    Polynom operator/(const double x);
     Polynom operator/(const Polynom& polynom);
     bool operator==(const Polynom& polynom);
     bool operator!=(const Polynom& polynom);
@@ -30,9 +28,9 @@ public:
     bool operator>=(const Polynom& polynom);
     bool operator<=(const Polynom& polynom);
 
-    void toString();
+    std::string toString();
+    double evaluate(double x, double y, double z);
 
-    int at(int x);
     Polynom derivative();
     Polynom integral();
 };

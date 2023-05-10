@@ -22,9 +22,9 @@ public:
 
 template <typename TKey, typename TValue>
 OpenShuffleTable<TKey, TValue>::OpenShuffleTable() {
-    size = 100; // начальный размер таблицы
-    count = 0; // количество элементов в таблице
-    loadFactor = 0.75; // максимальная загрузка таблицы
+    size = 100; // Г­Г Г·Г Г«ГјГ­Г»Г© Г°Г Г§Г¬ГҐГ° ГІГ ГЎГ«ГЁГ¶Г»
+    count = 0; // ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® ГЅГ«ГҐГ¬ГҐГ­ГІГ®Гў Гў ГІГ ГЎГ«ГЁГ¶ГҐ
+    loadFactor = 0.75; // Г¬Г ГЄГ±ГЁГ¬Г Г«ГјГ­Г Гї Г§Г ГЈГ°ГіГ§ГЄГ  ГІГ ГЎГ«ГЁГ¶Г» 
     data = new TTableRecord<TKey, TValue>[size];
 }
 
@@ -36,15 +36,15 @@ OpenShuffleTable<TKey, TValue>::~OpenShuffleTable() {
 template <typename TKey, typename TValue>
 int OpenShuffleTable<TKey, TValue>::insert(TKey key, TValue value) {
     if (count >= size * loadFactor) {
-        // Если достигнута максимальная загрузка таблицы, то увеличиваем ее размер
+        // Г…Г±Г«ГЁ Г¤Г®Г±ГІГЁГЈГ­ГіГІГ  Г¬Г ГЄГ±ГЁГ¬Г Г«ГјГ­Г Гї Г§Г ГЈГ°ГіГ§ГЄГ  ГІГ ГЎГ«ГЁГ¶Г», ГІГ® ГіГўГҐГ«ГЁГ·ГЁГўГ ГҐГ¬ ГҐГҐ Г°Г Г§Г¬ГҐГ°
         resize(size * 2);
     }
 
     int index = findFreeIndex(key);
     if (index != -1) {
-        // Если нашли свободный индекс, то вставляем элемент
+        // Г…Г±Г«ГЁ Г­Г ГёГ«ГЁ Г±ГўГ®ГЎГ®Г¤Г­Г»Г© ГЁГ­Г¤ГҐГЄГ±, ГІГ® ГўГ±ГІГ ГўГ«ГїГҐГ¬ ГЅГ«ГҐГ¬ГҐГ­ГІ
         TTableRecord<TKey, TValue> record = { key, value };
-        data[count] = record;
+        data[index] = record;
         count++;
     }
 
@@ -53,26 +53,35 @@ int OpenShuffleTable<TKey, TValue>::insert(TKey key, TValue value) {
 
 template <typename TKey, typename TValue>
 int OpenShuffleTable<TKey, TValue>::remove(TKey key) {
-    int index = findFreeIndex(key);
-    if (index != -1) {
-        // Если нашли элемент с таким же ключом, то удаляем его
-        data[index] = TTableRecord<TKey, TValue>(TKey(), TValue());
-        count--;
-        return 0;
+    try {
+        int index = findFreeIndex(key);
+        if (index != -1) {
+            // Г…Г±Г«ГЁ Г­Г ГёГ«ГЁ ГЅГ«ГҐГ¬ГҐГ­ГІ Г± ГІГ ГЄГЁГ¬ Г¦ГҐ ГЄГ«ГѕГ·Г®Г¬, ГІГ® ГіГ¤Г Г«ГїГҐГ¬ ГҐГЈГ®
+            data[index] = TTableRecord<TKey, TValue>(TKey(), TValue());
+            count--;
+            return 0;
+        }
+        throw std::runtime_error("This object not found");
     }
-
-    throw "Object not found";
+    catch (const std::exception& ex) {
+        std::cerr << "Error:" << ex.what() << std::endl;
+    }
 }
 
 template <typename TKey, typename TValue>
 TValue OpenShuffleTable<TKey, TValue>::find(TKey key) {
-    int index = findFreeIndex(key);
-    if (index != -1) {
-        // Если нашли элемент с таким же ключом, то возвращаем его значение
-        return data[index].value;
+    try {
+        int index = findFreeIndex(key);
+        if (index != -1) {
+            // Г…Г±Г«ГЁ Г­Г ГёГ«ГЁ ГЅГ«ГҐГ¬ГҐГ­ГІ Г± ГІГ ГЄГЁГ¬ Г¦ГҐ ГЄГ«ГѕГ·Г®Г¬, ГІГ® ГўГ®Г§ГўГ°Г Г№Г ГҐГ¬ ГҐГЈГ® Г§Г­Г Г·ГҐГ­ГЁГҐ
+            return data[index].value;
+        }
+        // Г…Г±Г«ГЁ ГЅГ«ГҐГ¬ГҐГ­ГІ Г­ГҐ Г­Г Г©Г¤ГҐГ­, ГІГ® ГўГ®Г§ГўГ°Г Г№Г ГҐГ¬ Г®ГёГЁГЎГЄГі
+        throw std::runtime_error("This object not found");
     }
-    // Если элемент не найден, то возвращаем ошибку
-    throw "Object not found";
+    catch (const std::exception& ex) {
+        std::cerr << "Error:" << ex.what() << std::endl;
+    }
 }
 
 template <typename TKey, typename TValue>
@@ -98,13 +107,13 @@ int OpenShuffleTable<TKey, TValue>::findFreeIndex(TKey key) {
     int startIndex = index;
     do {
         if (data[index].key == key || data[index].key == TKey()) {
-            // Если нашли элемент с таким же ключом или элемент без ключа,
-            // то возвращаем индекс
+            // Г…Г±Г«ГЁ Г­Г ГёГ«ГЁ ГЅГ«ГҐГ¬ГҐГ­ГІ Г± ГІГ ГЄГЁГ¬ Г¦ГҐ ГЄГ«ГѕГ·Г®Г¬ ГЁГ«ГЁ ГЅГ«ГҐГ¬ГҐГ­ГІ ГЎГҐГ§ ГЄГ«ГѕГ·Г ,
+            // ГІГ® ГўГ®Г§ГўГ°Г Г№Г ГҐГ¬ ГЁГ­Г¤ГҐГЄГ±
             return index;
         }
-        index = (index + 1) % size; // двигаемся по таблице
+        index = (index + 1) % size; // Г¤ГўГЁГЈГ ГҐГ¬Г±Гї ГЇГ® ГІГ ГЎГ«ГЁГ¶ГҐ
     } while (index != startIndex);
-    // Если прошли всю таблицу и не нашли свободный индекс, то возвращаем -1
+    // Г…Г±Г«ГЁ ГЇГ°Г®ГёГ«ГЁ ГўГ±Гѕ ГІГ ГЎГ«ГЁГ¶Гі ГЁ Г­ГҐ Г­Г ГёГ«ГЁ Г±ГўГ®ГЎГ®Г¤Г­Г»Г© ГЁГ­Г¤ГҐГЄГ±, ГІГ® ГўГ®Г§ГўГ°Г Г№Г ГҐГ¬ -1
     return -1;
 }
 

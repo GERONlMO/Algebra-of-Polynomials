@@ -8,16 +8,20 @@ class Monom {
 	double coeff;
 	int* powers;
 	int numVars;
-  std::string varsName[3] = {"x", "y", "z"};
+    std::string varsName[3] = {"x", "y", "z"};
+    std::string printPowers();
+    bool isEqual(Monom monom);
 public:
 	Monom();
 	Monom(const Monom& monom);
 	Monom(double coeff, int numVars, int* powers);
 	~Monom();
 	double getCoeff();
+    void setCoeff(double coeff);
 	int* getPowers();
 	int getNumVars();
-	void toString();
+    double evaluate(double x, double y, double z);
+	std::string toString();
 	Monom& operator=(const Monom& monom);
 	Monom operator+(const Monom& monom);
 	Monom operator+=(const Monom& monom);

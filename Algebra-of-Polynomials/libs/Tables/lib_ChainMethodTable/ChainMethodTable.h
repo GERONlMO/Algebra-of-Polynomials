@@ -50,34 +50,42 @@ int ChainMethodTable<TKey, TValue>::insert(TKey key, TValue value) {
 
 template <typename TKey, typename TValue>
 int ChainMethodTable<TKey, TValue>::remove(TKey key) {
-    int index = hash(key);
-    std::vector<TTableRecord<TKey, TValue>>& chain = table[index];
+    try {
+        int index = hash(key);
+        std::vector<TTableRecord<TKey, TValue>>& chain = table[index];
 
-    for (auto it = chain.begin(); it != chain.end(); it++) {
-        if (it->key == key) {
-            chain.erase(it);
-            count--;
-            return 0;
+        for (auto it = chain.begin(); it != chain.end(); it++) {
+            if (it->key == key) {
+                chain.erase(it);
+                count--;
+                return 0;
+            }
         }
+        throw std::runtime_error("This object not found");
     }
-
-    throw "Object not found";
+    catch (const std::exception& ex) {
+        std::cerr << "Error:" << ex.what() << std::endl;
+    }
 }
 
 template <typename TKey, typename TValue>
 TValue ChainMethodTable<TKey, TValue>::find(TKey key) {
-    TValue result;
-    int index = hash(key);
-    std::vector<TTableRecord<TKey, TValue>>& chain = table[index];
+    try {
+        TValue result;
+        int index = hash(key);
+        std::vector<TTableRecord<TKey, TValue>>& chain = table[index];
 
-    for (auto it = chain.begin(); it != chain.end(); it++) {
-        if (it->key == key) {
-            result = it->value;
-            return result;
+        for (auto it = chain.begin(); it != chain.end(); it++) {
+            if (it->key == key) {
+                result = it->value;
+                return result;
+            }
         }
+        throw std::runtime_error("This object not found");
     }
-
-    throw "Object not found";
+    catch (const std::exception& ex) {
+        std::cerr << "Error:" << ex.what() << std::endl;
+    }
 }
 
 template <typename TKey, typename TValue>

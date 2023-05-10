@@ -1,6 +1,8 @@
 #ifndef LIB_TABLE_TTABLERECORD_H_
 #define LIB_TABLE_TTABLERECORD_H_
 
+#include <tuple>
+
 template <typename TKey, typename TValue>
 struct TTableRecord {
     TKey key;
