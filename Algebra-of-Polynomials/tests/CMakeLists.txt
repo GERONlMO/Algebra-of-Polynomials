@@ -1,1 +1,29 @@
-create_executable_project(AllTests)
+enable_testing()
+
+add_executable(
+    AllTests
+    test_main.cpp
+    test_HashTable.cpp
+    test_LinearArrayTable.cpp
+    test_LinearListTable.cpp
+    test_List.cpp
+    test_Monom.cpp
+    test_Node.cpp
+    test_OrderedTable.cpp
+    test_Parser.cpp
+    test_Polynom.cpp
+    test_SortedArrayTable.cpp
+    test_SortedTable.cpp
+    test_Stack.cpp
+    test_Table.cpp
+    test_Tree.cpp
+    test_UnorderedTable.cpp
+    test_UnsortedTable.cpp
+)
+target_link_libraries(
+    AllTests
+    GTest::gtest_main
+)
+
+include(GoogleTest)
+gtest_discover_tests(AllTests)

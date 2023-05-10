@@ -5,6 +5,21 @@ cmake_minimum_required (VERSION 3.8)
 
 # название проекта
 set(CMAKE_CXX_STANDARD 20)
+# подключение модуля FetchContent
+include(FetchContent)
+
+# скачивания архива гугл тестов
+FetchContent_Declare(
+    googletest
+    URL https://github.com/google/googletest/archive/refs/heads/main.zip
+)
+
+
+# отключаем возможность изменять параметры компилятора/линковщика родительского проекта
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+
+# гарантируем, что именованные зависимости были заполнены
+FetchContent_MakeAvailable(googletest)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project ("Algebra-of-Polynomials")
 
@@ -35,13 +50,4 @@ add_subdirectory ("libs/Tables/lib_SortedTable")
 add_subdirectory ("libs/Tables/lib_Table")
 add_subdirectory ("libs/Tables/lib_UnorderedTable")
 add_subdirectory ("libs/Tables/lib_UnsortedTable")
-
-
-
-
-option(BTEST "build test?" OFF) # указываем подключаем ли google-тесты (ON или YES) или нет (OFF или NO)
-
-if(BTEST)                        # если тесты подключены
-    add_subdirectory(gtest)      # подключаем дополнительный CMakeLists.txt из подкаталога с именем gtest
-    add_subdirectory(tests)      # подключаем дополнительный CMakeLists.txt из подкаталога с именем test
-endif()
+add_subdirectory ("tests")
