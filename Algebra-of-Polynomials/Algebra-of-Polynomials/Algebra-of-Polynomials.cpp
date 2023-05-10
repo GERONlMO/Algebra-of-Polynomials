@@ -29,7 +29,7 @@ int main()
     Polynom polynom3 = Polynom("-1.3xz^4");
     cout << "Polynom3 = " << polynom3.toString() << endl << endl;
 
-    /*cout << "Polynom1 at (1,1,1) = " << polynom1.evaluate(1, 1, 1) << endl;
+    cout << "Polynom1 at (1,1,1) = " << polynom1.evaluate(1, 1, 1) << endl;
 
     Polynom plusPolynom = polynom1 + polynom2;
     cout << "Polynom1 + Polynom2 = " << plusPolynom.toString() << endl;
@@ -43,7 +43,6 @@ int main()
     Polynom multPPolynom = polynom1 * polynom3;
     cout << "Polynom1 * Polynom3 = " << multPPolynom.toString() << endl;
     cout << endl << endl;
-    */
 
     ChainMethodTable<std::string, Polynom> chainTable;
     chainTable.insert("Pol_1", polynom1);
