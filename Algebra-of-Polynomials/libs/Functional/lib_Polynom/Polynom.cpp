@@ -1,24 +1,15 @@
 #include "Polynom.h"
+#include "../lib_Parser/Parser.h"
 #include <sstream>
 #include <iomanip>
 
 Polynom::Polynom(std::string str) {
-    std::string delimiter = "+-";
-
-    size_t start = 0, end = 0;
-    while ((end = str.find_first_of(delimiter, start)) != std::string::npos) {
-        std::string token = str.substr(start, end - start);
-        stringInMonom(token);
-        signs += str.substr(end, 1);
-        start = end + 1;
-    }
-    stringInMonom(str.substr(start));
-    signs += " ";
+    Parser parser(str);
+    monoms = parser.parse();
 }
 
 Polynom::Polynom(const Polynom& polynom) {
     monoms = polynom.monoms;
-    signs = polynom.signs;
 }
 
 Polynom::~Polynom() {
@@ -31,7 +22,6 @@ Polynom::~Polynom() {
 
 Polynom& Polynom::operator=(const Polynom& polynom) {
     monoms = polynom.monoms;
-    signs = polynom.signs;
     return *this;
 }
 
@@ -41,62 +31,156 @@ bool Polynom::operator==(const Polynom& polynom) {
         return false;
     }
 }
-
 bool Polynom::operator!=(const Polynom& polynom) {
-
+    return !operator==(polynom);
 }
-
+//CHECK
 bool Polynom::operator>(const Polynom& polynom) {
-
+    Polynom tmp = polynom;
+    return this->evaluate(1,1,1) > tmp.evaluate(1,1,1);
 }
-
+//CHECK
 bool Polynom::operator<(const Polynom& polynom) {
-
+    return !operator>(polynom);
 }
-
+//CHECK
 bool Polynom::operator>=(const Polynom& polynom) {
-
+    return operator>(polynom) || operator==(polynom);
 }
-
+//CHECK
 bool Polynom::operator<=(const Polynom& polynom) {
-
+    return !operator>(polynom) || operator==(polynom);
 }
 
-void Polynom::stringInMonom(std::string strMonom) {
-    double coeff = 1;
-    int numVars = 3;
-    int powers[] = { 0, 0, 0};
-    std::string varsName = "xyz";
-    for (int i = 0; i < strMonom.size(); i++) {
-        if (strMonom[i] >= '0' && strMonom[i] <= '9') {
-            coeff = std::stod(strMonom);
-        }
-        if (strMonom[i] == 'x' || strMonom[i] == 'y' || strMonom[i] == 'z') {
-            for (int j = 0; j < 3; j++) {
-                if (strMonom[i] == varsName[j]) {
-                    if (strMonom[i + 1] == '^') {
-                        powers[j] = std::stoi(strMonom.substr(i + 2));
-                    }
-                    else {
-                        powers[j] = 1;
-                    }
-                }
+//COMPLETED
+std::string Polynom::toString() {
+    std::string out;
+    if (monoms.size() == 0) {
+        out += "0";
+        return out;
+    }
+    int i = 0;
+    while (i < monoms.size()) {
+        Monom monom = monoms.get(i);
+        if (monoms.size() == 1)
+            out += monom.toString();
+        else if (monom.getCoeff() > 0)
+            out += "+" + monom.toString();
+        else
+            out += monom.toString();
+        i++;
+    }
+    return out;
+}
+//COMPLETED
+Polynom Polynom::operator+(const Monom &monom) {
+    Polynom result = *this;
+    int index = result.monoms.contains(monom);
+    if (index != -1) {
+        result.monoms.get(index) += monom;
+        if (result.monoms.get(index).getCoeff() == 0)
+            result.monoms.remove(result.monoms.get(index));
+    } else {
+        result.monoms.push_back(monom);
+    }
+    return result;
+}
+
+//COMPLETED
+Polynom Polynom::operator-(const Monom &monom) {
+    Polynom result = *this;
+    int index = result.monoms.contains(monom);
+    if (index != -1) {
+        result.monoms.get(index) -= monom;
+        if (result.monoms.get(index).getCoeff() == 0)
+            result.monoms.remove(result.monoms.get(index));
+    } else {
+        result.monoms.push_back(monom);
+    }
+    return result;
+}
+
+//COMPLETED
+Polynom Polynom::operator+(const Polynom &polynom) {
+    Polynom result = *this;
+    List<Monom> tmp = polynom.monoms;
+    if (this->monoms.empty() != 1) {
+        for (int i = 0; i < result.monoms.size(); i++) {
+            int index = tmp.contains(result.monoms.get(i));
+            if (index != -1) {
+                result.monoms.get(i) += tmp.get(index);
+                if (result.monoms.get(i).getCoeff() == 0)
+                    result.monoms.remove(result.monoms.get(i));
+                tmp.remove(tmp.get(index));
             }
         }
     }
-    Monom monom(coeff, numVars, powers);
-    monoms.push_back(monom);
+    for (int i = 0; i < tmp.size(); i++) {
+        result.monoms.push_back(tmp.get(i));
+    }
+    return result;
 }
 
-void Polynom::toString() {
-    if (monoms.size() == 0) {
-        std::cout << "0";
-        return;
-    }
-    for (int i = 0; i < monoms.size(); i++) {
-        Monom monom = monoms.get(i);
+//COMPLETED
+Polynom Polynom::operator-(const Polynom &polynom) {
+    Polynom result = Polynom();
+    List<Monom> tmp = polynom.monoms;
+    if (this->monoms.empty() != 1) {
+        for (int i = 0; i < result.monoms.size(); i++) {
+            int index = tmp.contains(result.monoms.get(i));
+            if (index != -1) {
 
-        monom.toString();
-        std::cout << " " << signs[i] << " ";
+                result.monoms.get(i) -= tmp.get(index);
+                if (result.monoms.get(i).getCoeff() == 0)
+                    result.monoms.remove(result.monoms.get(i));
+                tmp.remove(tmp.get(index));
+
+            }
+        }
     }
+    for (int i = 0; i < tmp.size(); i++) {
+        result.monoms.push_back(tmp.get(i));
+    }
+    return result;
+}
+
+//COMPLETED
+Polynom Polynom::operator*(const double x) {
+    Polynom result = *this;
+    for (int i = 0; i < monoms.size(); i++) {
+        result.monoms.get(i).setCoeff(result.monoms.get(i).getCoeff() * x);
+    }
+    return result;
+}
+
+//COMPLETED
+Polynom Polynom::operator/(const double x) {
+    Polynom result = *this;
+    for (int i = 0; i < monoms.size(); i++) {
+        result.monoms.get(i).setCoeff(result.monoms.get(i).getCoeff() / x);
+    }
+    return result;
+}
+
+
+//COMPLETED
+Polynom Polynom::operator*(const Polynom &polynom) {
+    Polynom result = Polynom();
+    List<Monom> res;
+    List<Monom> tmp = polynom.monoms;
+    for (int i = 0; i < monoms.size(); i++) {
+        for (int j = 0; j < tmp.size(); j++) {
+            res.push_back(monoms.get(i) * tmp.get(j));
+        }
+    }
+    result.monoms = res;
+    return result;
+}
+
+double Polynom::evaluate(double x, double y, double z) {
+    double result = 0;
+    for (int i = 0; i < monoms.size(); i++) {
+        result += monoms.get(i).evaluate(x,y,z);
+    }
+    return result;
 }
