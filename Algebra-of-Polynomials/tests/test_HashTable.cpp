@@ -1,2 +1,6 @@
-#include <gtest.h>
-#include "../libs/lib_HashTable/HashTable.h"
+#include <gtest/gtest.h>
+#include "../libs/Tables/lib_HashTable/HashTable.h"
+
+TEST(aaa, bbb) {
+
+}
