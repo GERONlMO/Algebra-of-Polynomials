@@ -13,7 +13,7 @@ List<Monom> Parser::parse() {
      std::string delimeter = "+-";
      std::string token;
      size_t start = 0, end = targetExpression.find_first_of(delimeter, start);
-     if (end != 0) {
+     if (end != std::string::npos) {
          token = targetExpression.substr(start, end - start);
          parseMonom(token);
          start = ++end;

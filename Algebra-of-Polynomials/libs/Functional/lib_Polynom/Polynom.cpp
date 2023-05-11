@@ -119,7 +119,7 @@ Polynom Polynom::operator+(const Polynom &polynom) {
 
 //COMPLETED
 Polynom Polynom::operator-(const Polynom &polynom) {
-    Polynom result = Polynom();
+    Polynom result = *this;
     List<Monom> tmp = polynom.monoms;
     if (this->monoms.empty() != 1) {
         for (int i = 0; i < result.monoms.size(); i++) {
@@ -135,6 +135,8 @@ Polynom Polynom::operator-(const Polynom &polynom) {
         }
     }
     for (int i = 0; i < tmp.size(); i++) {
+        if (result.monoms.size() == 0 && tmp.get(i).getCoeff() < 0)
+            - tmp.get(i);
         result.monoms.push_back(tmp.get(i));
     }
     return result;
