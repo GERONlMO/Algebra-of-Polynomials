@@ -136,7 +136,7 @@ Polynom Polynom::operator-(const Polynom &polynom) {
     }
     for (int i = 0; i < tmp.size(); i++) {
         if (result.monoms.size() == 0 && tmp.get(i).getCoeff() < 0)
-            - tmp.get(i);
+            -tmp.get(i);
         result.monoms.push_back(tmp.get(i));
     }
     return result;

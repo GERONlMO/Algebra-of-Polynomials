@@ -41,6 +41,7 @@ public:
 		return *this;
 	}
 
+
 	TValue& get(int index) {
 		try {
 			if (index < 0 || index >= _size) {
