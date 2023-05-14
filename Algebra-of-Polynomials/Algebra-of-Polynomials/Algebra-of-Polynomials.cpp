@@ -9,6 +9,7 @@
 #include "LinearArrayTable.h"
 #include "SortedArrayTable.h"
 #include "AVLTreeTable.h"
+#include "Parser.cpp"
 
 ChainMethodTable<std::string, Polynom> chainTable;
 OpenShuffleTable<std::string, Polynom> openShuffleTable;
@@ -16,6 +17,7 @@ SortedArrayTable<std::string, Polynom> sortedArrayTable;
 LinearArrayTable<std::string, Polynom> linearArrayTable;
 LinearListTable<std::string, Polynom> linearListTable;
 AVLTreeTable<std::string, Polynom> avlTreeTable;
+
 
 std::string enterName() {
     std::string key;
@@ -51,6 +53,12 @@ void addPolynomial() {
 
 void createAndAddPolynomial() {
     std::cout << "\nCreating a new polynomial from existing ones and constants, adding it to tables\n";
+    std::string input;
+    getline(std::cin, input);
+    Parser parser(input, &sortedArrayTable);
+    parser.toPostfix(input);
+    Polynom tmp = parser.calculate();
+    std::cout << tmp.toString() << std::endl;
 }
 
 void deletePolynomial() {

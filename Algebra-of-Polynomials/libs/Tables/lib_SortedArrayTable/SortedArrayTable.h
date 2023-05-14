@@ -2,6 +2,7 @@
 #define LIB_SORTEDARRAYTABLE_SORTEDARRAYTABLE_H_
 
 #include "..\lib_SortedTable\SortedTable.h"
+
 template <typename TKey, typename TValue>
 class SortedArrayTable : public SortedTable<TKey, TValue> {
 	size_t size;
