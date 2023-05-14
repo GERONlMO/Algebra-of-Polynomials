@@ -8,6 +8,11 @@ Polynom::Polynom(std::string str) {
     monoms = parser.parse();
 }
 
+/*Polynom::Polynom(std::string str, SortedArrayTable<std::string, Polynom>* table) {
+    Parser parser(str, table);
+    monoms = parser.parse();
+}*/
+
 Polynom::Polynom(const Polynom& polynom) {
     monoms = polynom.monoms;
 }
